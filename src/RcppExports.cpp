@@ -5,14 +5,15 @@
 
 using namespace Rcpp;
 
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP scrmr_rcpp_hello_world() {
+// scrm
+List scrm(std::string args);
+RcppExport SEXP scrmr_scrm(SEXP argsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        List __result = rcpp_hello_world();
+        Rcpp::traits::input_parameter< std::string >::type args(argsSEXP );
+        List __result = scrm(args);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
