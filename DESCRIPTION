@@ -1,0 +1,11 @@
+Package: scrmr
+Type: Package
+Title: Fast Simulation of Biological Sequences
+Version: 1.2-0
+Date: 2014-09-10
+Author: Paul Staab, Joe (Zhu) Sha, Dirk Metzler and Gerton Lunter
+Maintainer: Paul R. Staab <staab@bio.lmu.de>
+Description: TBR
+License: GPL (>= 3)
+Imports: Rcpp (>= 0.11.2)
+LinkingTo: Rcpp
