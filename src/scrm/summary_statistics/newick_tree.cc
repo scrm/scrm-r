@@ -21,6 +21,10 @@
 
 #include "newick_tree.h"
 
+NewickTree::NewickTree(const size_t sample_size) {
+
+};
+
 void NewickTree::calculate(const Forest &forest) {
   if (forest.model().recombination_rate() == 0.0) {
     output_buffer_ << generateTree(forest.local_root(), forest) 
@@ -48,11 +52,15 @@ void NewickTree::printLocusOutput(std::ostream &output) {
  * @return A part of the tree in newick format
  */
 std::string NewickTree::generateTree(Node *node, const Forest &forest, const bool use_buffer) {
+  if (use_buffer) dout << "Node: " << node << " " <<  node->length_below() << std::endl;
   // Use tree from buffer if possible
   std::map<Node const*, NewickBuffer>::iterator it = buffer_.find(node);
   if (use_buffer && it != buffer_.end()) {
     if (it->second.position > node->last_change()) {
-      // Check that the buffered tree is correct.
+      // The equal comparison between doubles is intentional to be as sure as
+      // possible that the subtree did not change.
+      dout << "Tree from buffer: " << it->second.tree << std::endl;
+      dout << "Real Tree:        " << generateTree(node, forest, false) << std::endl;
       assert(it->second.tree.compare(generateTree(node, forest, false)) == 0);
       return it->second.tree;
     }
