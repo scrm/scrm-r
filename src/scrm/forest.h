@@ -36,6 +36,8 @@
 #ifndef scrm_src_forest
 #define scrm_src_forest
 
+#include "../r_macros.h"
+
 #include <vector>
 #include <unordered_set>
 #include <stdexcept>
@@ -46,7 +48,6 @@
 #include "contemporaries_container.h"
 #include "event.h"
 #include "model.h"
-#include "macros.h"
 #include "node.h"
 #include "node_container.h"
 #include "time_interval.h"

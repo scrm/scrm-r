@@ -31,6 +31,8 @@
 #ifndef scrm_node
 #define scrm_node
 
+#include "../r_macros.h"
+
 #include <cstddef>
 #include <cfloat>
 #include <stdexcept>

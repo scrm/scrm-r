@@ -6,6 +6,18 @@
 #' @examples
 #' scrm('')
 scrm <- function(args) {
-    .Call('scrmr_scrm', PACKAGE = 'scrmr', args)
+    .Call('scrm_scrm', PACKAGE = 'scrm', args)
+}
+
+test_RRG_sample <- function() {
+    .Call('scrm_test_RRG_sample', PACKAGE = 'scrm')
+}
+
+test_RRG_sampleUnitExpo <- function() {
+    .Call('scrm_test_RRG_sampleUnitExpo', PACKAGE = 'scrm')
+}
+
+test_RRG_sampleExpoExpoLimit <- function(lambda, b, limit) {
+    .Call('scrm_test_RRG_sampleExpoExpoLimit', PACKAGE = 'scrm', lambda, b, limit)
 }
 

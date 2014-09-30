@@ -23,6 +23,8 @@
 #ifndef scrm_src_treepoint
 #define scrm_src_treepoint
 
+#include "../r_macros.h"
+
 #include <cassert>
 #include "node.h"
 

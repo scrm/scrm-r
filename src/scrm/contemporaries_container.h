@@ -23,6 +23,8 @@
 #ifndef scrm_src_contemporaries_container
 #define scrm_src_contemporaries_container
 
+#include "../r_macros.h"
+
 #include <vector>
 #include <unordered_set>
 #include <cassert>

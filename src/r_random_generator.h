@@ -30,13 +30,21 @@ using namespace Rcpp;
 
 class RRandomGenerator : public RandomGenerator {
  public:
-  RRandomGenerator() {};
+  RRandomGenerator() {
+    this->initializeUnitExponential();
+  };
   virtual ~RRandomGenerator() {};
 
   void initialize() {};
+  
   double sample() { 
     RNGScope scope;
-    return R::runif(0,1); 
+    return R::runif(0,1);
+  }
+  
+  double sampleUnitExponential() {
+    RNGScope scope;
+    return R::rexp(1); 
   }
 };
 

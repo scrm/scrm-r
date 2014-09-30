@@ -32,6 +32,8 @@
 #define scrm_src_model
 #pragma GCC diagnostic ignored "-Wsign-compare"
 
+#include "../r_macros.h"
+
 #include <cstddef>
 #include <vector>
 #include <cfloat>

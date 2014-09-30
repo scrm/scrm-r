@@ -1,13 +1,14 @@
 #ifndef scrm_macros
 #define scrm_macros
 
-// Unless compiled with options NDEBUG, we will produce a debug output using 
-// 'dout' instead of cout and execute (expensive) assert statements.
+#include "Rcpp.h"
+
+// Assure that assertions are deactived
 #ifndef NDEBUG
-#define dout std::cout
-#else
-#define dout 0 && std::cout
+#define NDEBUG
 #endif
+
+#define dout Rcpp::Rcout
 
 // from Knuths "The art of computer programming"
 inline bool areSame(const double a, const double b, 

@@ -23,6 +23,8 @@
 #ifndef scrm_src_node_container
 #define scrm_src_node_container
 
+#include "../r_macros.h"
+
 #include <vector>
 #include <stdexcept>
 #include <cfloat>

@@ -16,5 +16,5 @@
 #' @keywords package
 #' 
 #' @importFrom Rcpp evalCpp
-#' @useDynLib scrmr
+#' @useDynLib scrm
 NULL

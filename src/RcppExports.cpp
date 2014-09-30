@@ -7,13 +7,58 @@ using namespace Rcpp;
 
 // scrm
 List scrm(std::string args);
-RcppExport SEXP scrmr_scrm(SEXP argsSEXP) {
+RcppExport SEXP scrm_scrm(SEXP argsSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< std::string >::type args(argsSEXP );
         List __result = scrm(args);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// test_RRG_sample
+double test_RRG_sample();
+RcppExport SEXP scrm_test_RRG_sample() {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        double __result = test_RRG_sample();
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// test_RRG_sampleUnitExpo
+double test_RRG_sampleUnitExpo();
+RcppExport SEXP scrm_test_RRG_sampleUnitExpo() {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        double __result = test_RRG_sampleUnitExpo();
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// test_RRG_sampleExpoExpoLimit
+double test_RRG_sampleExpoExpoLimit(double lambda, double b, double limit);
+RcppExport SEXP scrm_test_RRG_sampleExpoExpoLimit(SEXP lambdaSEXP, SEXP bSEXP, SEXP limitSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP );
+        Rcpp::traits::input_parameter< double >::type b(bSEXP );
+        Rcpp::traits::input_parameter< double >::type limit(limitSEXP );
+        double __result = test_RRG_sampleExpoExpoLimit(lambda, b, limit);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
