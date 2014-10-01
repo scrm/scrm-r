@@ -23,7 +23,7 @@
 #ifndef scrm_src_node_container
 #define scrm_src_node_container
 
-#include "../r_macros.h"
+#include "macros.h" // Needs to be before cassert
 
 #include <vector>
 #include <stdexcept>

@@ -23,7 +23,7 @@
 #ifndef scrm_src_treepoint
 #define scrm_src_treepoint
 
-#include "../r_macros.h"
+#include "macros.h" // Needs to be before cassert
 
 #include <cassert>
 #include "node.h"
@@ -32,7 +32,6 @@ class TreePoint {
 public:
   TreePoint() {};
   TreePoint(Node* base_node, double height, bool relative);
-  ~TreePoint () {};
 
   Node*  base_node()       const { return base_node_; }
   double relative_height() const { return relative_height_; }

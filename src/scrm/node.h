@@ -31,7 +31,7 @@
 #ifndef scrm_node
 #define scrm_node
 
-#include "../r_macros.h"
+#include "macros.h" // Needs to be before cassert
 
 #include <cstddef>
 #include <cfloat>

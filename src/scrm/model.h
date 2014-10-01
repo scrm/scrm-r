@@ -32,7 +32,7 @@
 #define scrm_src_model
 #pragma GCC diagnostic ignored "-Wsign-compare"
 
-#include "../r_macros.h"
+#include "macros.h" // Needs to be before cassert
 
 #include <cstddef>
 #include <vector>

@@ -1,7 +1,7 @@
 OBJECTS.scrmr = scrmr.o test_exports.o RcppExports.o
 
 OBJECTS.scrm = scrm/forest.o scrm/model.o scrm/node.o scrm/node_container.o \
-							 scrm/param.o scrm/time_interval.o scrm/tree_point.o scrm/forest-debug.o
+							 scrm/param.o scrm/time_interval.o scrm/tree_point.o
 
 OBJECTS.random = scrm/random/random_generator.o scrm/random/fastfunc.o
 
@@ -16,4 +16,4 @@ OBJECTS = $(OBJECTS.scrmr) $(OBJECTS.scrm) $(OBJECTS.random) \
           $(OBJECTS.sumstats)
 
 CXX_STD = CXX11
-PKG_CPPFLAGS = '-DVERSION=1.2'
+PKG_CPPFLAGS = -DVERSION=1.2 -DRBUILD
