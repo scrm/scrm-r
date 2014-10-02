@@ -4,7 +4,7 @@
 #' Function to call scrm
 #' @export
 #' @examples
-#' scrm('')
+#' scrm('5 1 -r 10 100 -t 5')
 scrm <- function(args) {
     .Call('scrm_scrm', PACKAGE = 'scrm', args)
 }

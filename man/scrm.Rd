@@ -9,6 +9,6 @@ scrm(args)
 Function to call scrm
 }
 \examples{
-scrm('')
+scrm('5 1 -r 10 100 -t 5')
 }
 
