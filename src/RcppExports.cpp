@@ -6,14 +6,15 @@
 using namespace Rcpp;
 
 // scrm
-List scrm(std::string args);
-RcppExport SEXP scrm_scrm(SEXP argsSEXP) {
+List scrm(std::string args, std::string file = "");
+RcppExport SEXP scrm_scrm(SEXP argsSEXP, SEXP fileSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< std::string >::type args(argsSEXP );
-        List __result = scrm(args);
+        Rcpp::traits::input_parameter< std::string >::type file(fileSEXP );
+        List __result = scrm(args, file);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
