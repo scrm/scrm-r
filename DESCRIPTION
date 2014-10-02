@@ -7,6 +7,8 @@ Author: Paul Staab, Joe (Zhu) Sha, Dirk Metzler and Gerton Lunter
 Maintainer: Paul R. Staab <staab@bio.lmu.de>
 Description: TBR
 License: GPL (>= 3)
+Suggests:
+    testthat (>= 0.9.0)
 Imports:
     Rcpp (>= 0.11.2)
 SystemRequirements: C++11
