@@ -26,6 +26,11 @@ List scrm(std::string args) {
   param.parse(model);
   RRandomGenerator rrg;
   
+  /** Throw a warning if -seed argmuent is used */
+  Function warning("warning");
+  if (param.random_seed() != -1) 
+    warning("Ignoring Seed argument. Set a seed in R.");
+  
   Forest forest = Forest(&model, &rrg);
   
   // Loop over the independent loci/chromosomes
