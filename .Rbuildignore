@@ -1,4 +1,12 @@
 ^.*\.Rproj$
 ^tools$
 ^\.Rproj\.user$
-.travis.yml
+^\.travis\.yml$
+^.*.o$
+^src\/scrm\/scrm\.cc$
+^src\/scrm\/forest-debug\.cc$
+^src\/scrm\/random\/constant_generator\.cc$
+^src\/scrm\/random\/constant_generator\.h$
+^src\/scrm\/random\/mersenne_twister\.cc$
+^src\/scrm\/random\/mersenne_twister\.h$
+^src\/scrm\/random\/speedtest\.cc$
