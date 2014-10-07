@@ -6,12 +6,20 @@
 #include "scrm/param.h"
 #include "scrm/forest.h"
 #include "scrm/model.h"
-
+#include "scrm/summary_statistics/summary_statistic.h"
+#include "scrm/summary_statistics/seg_sites.h"
 #include "r_random_generator.h"
 
 using namespace Rcpp;
 std::ofstream fs;
 bool write_file;
+
+SEXP convertSumStat2R(SummaryStatistic const* sum_stat) {
+  if (typeid(*sum_stat) == typeid(SegSites)) {
+    Rcout << "SegSites" << std::endl;
+  }
+  return List::create();
+}
 
 // [[Rcpp::plugins(cpp11)]]
 
@@ -75,6 +83,9 @@ List scrm(std::string args, std::string file = "") {
     }
     
     if (write_file) forest.printLocusSumStats(fs);
+    
+    for (SumS)
+    
     forest.clear();
   }
   
