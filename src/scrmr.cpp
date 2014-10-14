@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <memory>
 
 #include "scrm/param.h"
 #include "scrm/forest.h"
@@ -14,11 +15,30 @@ using namespace Rcpp;
 std::ofstream fs;
 bool write_file;
 
-SEXP convertSumStat2R(SummaryStatistic const* sum_stat) {
-  if (typeid(*sum_stat) == typeid(SegSites)) {
-    Rcout << "SegSites" << std::endl;
+List convertSumStatsToList(const Forest &forest) {
+  List r_sum_stats(forest.model().countSummaryStatistics());
+  CharacterVector names(forest.model().countSummaryStatistics(), "");
+
+  for (size_t i = 0; i < forest.model().countSummaryStatistics(); ++i) {
+    std::shared_ptr<SummaryStatistic> sum_stat = 
+        forest.model().getSummaryStatistic(i);  
+
+    if (typeid(*sum_stat) == typeid(SegSites)) {
+      SegSites* ss = dynamic_cast<SegSites*>(sum_stat.get()); 
+      NumericMatrix seg_sites(forest.model().sample_size(), ss->countMutations());
+      for (size_t col = 0; col < ss->countMutations(); ++col) {
+        for (size_t row = 0; row < forest.model().sample_size(); ++row) {
+          seg_sites(row,col) = (*(ss->getHaplotype(col)))[row];
+        }
+      }
+      seg_sites.attr("dimnames") = List::create(R_NilValue, *(ss->positions()));
+      r_sum_stats(i) = seg_sites;
+      names(i) = "seg_sites";
+    }
   }
-  return List::create();
+
+  r_sum_stats.names() = names;
+  return r_sum_stats;
 }
 
 // [[Rcpp::plugins(cpp11)]]
@@ -57,6 +77,9 @@ List scrm(std::string args, std::string file = "") {
   if (write_file) fs << param << std::endl;
   Model model;
   param.parse(model);
+  Rcout << std::endl << std::endl << param << std::endl;
+  Rcout << "Initial SumStats: " << model.countSummaryStatistics() << std::endl; 
+  
   RRandomGenerator rrg;
   
   /** Throw a warning if -seed argmuent is used */
@@ -64,7 +87,11 @@ List scrm(std::string args, std::string file = "") {
   if (param.random_seed() != -1) 
     warning("Ignoring Seed argument. Set a seed in R.");
   
-  List output;
+  /** Throw a warning if no summary statistics are used */
+  if (model.countSummaryStatistics() == 0)
+    warning("No summary statisics specified. No output will be produced.");
+  
+  List output = List(model.loci_number());
   Forest forest = Forest(&model, &rrg);
   
   // Loop over the independent loci/chromosomes
@@ -82,9 +109,8 @@ List scrm(std::string args, std::string file = "") {
       if (write_file) forest.printSegmentSumStats(fs);
     }
     
+    output(rep_i) = convertSumStatsToList(forest);
     if (write_file) forest.printLocusSumStats(fs);
-    
-    for (SumS)
     
     forest.clear();
   }
