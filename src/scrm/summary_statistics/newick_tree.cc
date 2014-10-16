@@ -26,18 +26,15 @@ void NewickTree::calculate(const Forest &forest) {
     output_buffer_ << generateTree(forest.local_root(), forest) 
                    << ";" << std::endl;  
   } else {
-    if (forest.calcSegmentLength(forest.model().finite_sites()) == 0.0) return;
-    output_buffer_ << "[" << forest.calcSegmentLength(forest.model().finite_sites()) << "]" 
+    if (forest.calcSegmentLength() == 0.0) return;
+    output_buffer_ << "[" << forest.calcSegmentLength() << "]" 
                    << generateTree(forest.local_root(), forest)
                    << ";" << std::endl;
   }
 }
 
-void NewickTree::printLocusOutput(std::ostream &output) {
+void NewickTree::printLocusOutput(std::ostream &output) const {
   output << output_buffer_.str();  
-  output_buffer_.str("");
-  output_buffer_.clear();
-  buffer_.clear();
 }
 
 /**

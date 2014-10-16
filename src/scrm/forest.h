@@ -129,9 +129,12 @@ class Forest
    *
    * @return The length of the current segment (see above for its unit)
    */
-  double calcSegmentLength(bool finite_sites = true) const {
-    if (finite_sites) return ceil(next_base()) - ceil(current_base());
-    else return next_base() - current_base();
+  double calcSegmentLength() const {
+    if (model().getSequenceScaling() == relative) {
+      return (next_base() - current_base()) / model().loci_length();
+    } else {
+      return ceil(next_base()) - ceil(current_base());
+    }
   }
 
   void set_random_generator(RandomGenerator *rg) {
@@ -197,8 +200,8 @@ class Forest
   }
 
   // Calc & Print Summary Statistics
-  void calcSegmentSumStats() const;
-  void printSegmentSumStats(std::ostream &output) const;
+  void calcSegmentSumStats();
+  void clearSumStats();
   void printLocusSumStats(std::ostream &output) const;
   
  private:

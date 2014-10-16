@@ -20,11 +20,10 @@ List convertSumStatsToList(const Forest &forest) {
   CharacterVector names(forest.model().countSummaryStatistics(), "");
 
   for (size_t i = 0; i < forest.model().countSummaryStatistics(); ++i) {
-    std::shared_ptr<SummaryStatistic> sum_stat = 
-        forest.model().getSummaryStatistic(i);  
+    SummaryStatistic* sum_stat = forest.model().getSummaryStatistic(i);  
 
     if (typeid(*sum_stat) == typeid(SegSites)) {
-      SegSites* ss = dynamic_cast<SegSites*>(sum_stat.get()); 
+      SegSites* ss = dynamic_cast<SegSites*>(sum_stat); 
       NumericMatrix seg_sites(forest.model().sample_size(), ss->countMutations());
       for (size_t col = 0; col < ss->countMutations(); ++col) {
         for (size_t row = 0; row < forest.model().sample_size(); ++row) {
@@ -102,11 +101,9 @@ List scrm(std::string args, std::string file = "") {
     
     // Now set up the ARG, and sample the initial tree
     forest.buildInitialTree();
-    if (write_file) forest.printSegmentSumStats(fs);
     
     while (forest.next_base() < model.loci_length()) { 
       forest.sampleNextGenealogy();
-      if (write_file) forest.printSegmentSumStats(fs);
     }
     
     output(rep_i) = convertSumStatsToList(forest);
