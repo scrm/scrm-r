@@ -23,13 +23,11 @@
 
 void TMRCA::calculate(const Forest &forest) {
   if (forest.calcSegmentLength(forest.model().finite_sites()) == 0) return;
-  tmrca_.push_back(forest.getTMRCA(true));
-  tree_length_.push_back(forest.getLocalTreeLength(true));
+  output_buffer_ << "time:\t" << forest.getTMRCA(true) << " \t" << forest.getLocalTreeLength(true) << "\n";  
 }
 
 void TMRCA::printLocusOutput(std::ostream &output) {
-  for (size_t i = 0; i < tmrca_.size(); ++i) {
-    output << "time:\t" << tmrca_.at(i) << " \t" << tree_length_.at(i) << "\n";
-  }
-  this->clear();
+  output << output_buffer_.str();  
+  output_buffer_.str("");
+  output_buffer_.clear();
 }

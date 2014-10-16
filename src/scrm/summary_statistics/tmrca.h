@@ -40,16 +40,8 @@ class TMRCA : public SummaryStatistic
    void printSegmentOutput(std::ostream &output) { (void)output; }
    void printLocusOutput(std::ostream &output);
 
-   std::vector<double> tmrca() const { return tmrca_; }
-   std::vector<double> tree_length() const { return tree_length_; }
-   void clear() {
-    tmrca_.clear();
-    tree_length_.clear();
-   }
-
  private:
-   std::vector<double> tmrca_;
-   std::vector<double> tree_length_;
+   std::ostringstream output_buffer_;
 
 };
 
