@@ -72,12 +72,10 @@ List scrm(std::string args, std::string file = "") {
   }
   
   /** Parse args and generate the model */
-  Param param = Param("scrm " + args);
+  Param param("scrm " + args);
   if (write_file) fs << param << std::endl;
   Model model;
   param.parse(model);
-  Rcout << std::endl << std::endl << param << std::endl;
-  Rcout << "Initial SumStats: " << model.countSummaryStatistics() << std::endl; 
   
   RRandomGenerator rrg;
   
@@ -112,6 +110,9 @@ List scrm(std::string args, std::string file = "") {
     forest.clear();
   }
   
+  /** Clean up */
   if (write_file) fs.close();
+  rrg.clearFastFunc();
+  
   return output;
 }
