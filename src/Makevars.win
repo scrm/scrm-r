@@ -1,16 +1,15 @@
 OBJECTS.scrmr = scrmr.o test_exports.o RcppExports.o
 
 OBJECTS.scrm = scrm/forest.o scrm/model.o scrm/node.o scrm/node_container.o \
-							 scrm/param.o scrm/time_interval.o scrm/tree_point.o
+               scrm/param.o scrm/time_interval.o scrm/tree_point.o
 
 OBJECTS.random = scrm/random/random_generator.o scrm/random/fastfunc.o
 
-OBJECTS.sumstats = scrm/summary_statistics/first_last_tmrca.o \
-									 scrm/summary_statistics/frequency_spectrum.o \
-									 scrm/summary_statistics/newick_tree.o \
-									 scrm/summary_statistics/oriented_forest.o \
-									 scrm/summary_statistics/seg_sites.o \
-									 scrm/summary_statistics/tmrca.o
+OBJECTS.sumstats = scrm/summary_statistics/frequency_spectrum.o \
+                   scrm/summary_statistics/newick_tree.o \
+                   scrm/summary_statistics/oriented_forest.o \
+                   scrm/summary_statistics/seg_sites.o \
+                   scrm/summary_statistics/tmrca.o
 
 OBJECTS = $(OBJECTS.scrmr) $(OBJECTS.scrm) $(OBJECTS.random) \
           $(OBJECTS.sumstats)
