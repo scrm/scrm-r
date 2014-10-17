@@ -30,6 +30,7 @@
 #include "scrm/summary_statistics/seg_sites.h"
 #include "scrm/summary_statistics/tmrca.h"
 #include "scrm/summary_statistics/newick_tree.h"
+#include "scrm/summary_statistics/oriented_forest.h"
 
 using namespace Rcpp;
 

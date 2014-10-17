@@ -22,6 +22,11 @@ List initSumStats(const Forest &forest) {
       names(i) = "trees";
     }
     
+    else if (typeid(*sum_stat) == typeid(OrientedForest)) {
+      sum_stats(i) = List(forest.model().loci_number());
+      names(i) = "oriented_forest";
+    }
+    
     else stop("Failed to parse unknown Summary Statistic.");
   }
 
@@ -67,6 +72,11 @@ void addLocusSumStats(const Forest &forest, size_t locus, List &sum_stats) {
     else if (typeid(*sum_stat) == typeid(NewickTree)) {
       NewickTree* nt = dynamic_cast<NewickTree*>(sum_stat);
       as<List>(sum_stats[i])[locus] = nt->getTrees();
+    }
+    
+    else if (typeid(*sum_stat) == typeid(OrientedForest)) {
+      OrientedForest* of = dynamic_cast<OrientedForest*>(sum_stat);
+      as<List>(sum_stats[i])[locus] = of->getTrees();
     }
   }
 }
