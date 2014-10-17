@@ -22,8 +22,8 @@ test_that("runs a reproducible", {
 })
 
 test_that("warning is given when using -seed", {
-  expect_warning(scrm('10 1 -seed 17'))
-  expect_warning(scrm('10 1 -seed 1 2 3'))
+  expect_warning(scrm('10 1 -seed 17 -L'))
+  expect_warning(scrm('10 1 -seed 1 2 3 -L'))
 })
 
 test_that("writing into a file works", {

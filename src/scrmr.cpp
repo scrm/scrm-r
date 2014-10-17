@@ -7,38 +7,14 @@
 #include "scrm/param.h"
 #include "scrm/forest.h"
 #include "scrm/model.h"
-#include "scrm/summary_statistics/summary_statistic.h"
-#include "scrm/summary_statistics/seg_sites.h"
+
+#include "summary_statistics.h"
 #include "r_random_generator.h"
 
 using namespace Rcpp;
 std::ofstream fs;
 bool write_file;
 
-List convertSumStatsToList(const Forest &forest) {
-  List r_sum_stats(forest.model().countSummaryStatistics());
-  CharacterVector names(forest.model().countSummaryStatistics(), "");
-
-  for (size_t i = 0; i < forest.model().countSummaryStatistics(); ++i) {
-    SummaryStatistic* sum_stat = forest.model().getSummaryStatistic(i);  
-
-    if (typeid(*sum_stat) == typeid(SegSites)) {
-      SegSites* ss = dynamic_cast<SegSites*>(sum_stat); 
-      NumericMatrix seg_sites(forest.model().sample_size(), ss->countMutations());
-      for (size_t col = 0; col < ss->countMutations(); ++col) {
-        for (size_t row = 0; row < forest.model().sample_size(); ++row) {
-          seg_sites(row,col) = (*(ss->getHaplotype(col)))[row];
-        }
-      }
-      seg_sites.attr("dimnames") = List::create(R_NilValue, *(ss->positions()));
-      r_sum_stats(i) = seg_sites;
-      names(i) = "seg_sites";
-    }
-  }
-
-  r_sum_stats.names() = names;
-  return r_sum_stats;
-}
 
 // [[Rcpp::plugins(cpp11)]]
 
@@ -88,8 +64,8 @@ List scrm(std::string args, std::string file = "") {
   if (model.countSummaryStatistics() == 0)
     warning("No summary statisics specified. No output will be produced.");
   
-  List output = List(model.loci_number());
   Forest forest = Forest(&model, &rrg);
+  List sum_stats = initSumStats(forest);
   
   // Loop over the independent loci/chromosomes
   for (size_t rep_i=0; rep_i < model.loci_number(); ++rep_i) {
@@ -104,7 +80,7 @@ List scrm(std::string args, std::string file = "") {
       forest.sampleNextGenealogy();
     }
     
-    output(rep_i) = convertSumStatsToList(forest);
+    addLocusSumStats(forest, rep_i, sum_stats);
     if (write_file) forest.printLocusSumStats(fs);
     
     forest.clear();
@@ -114,5 +90,5 @@ List scrm(std::string args, std::string file = "") {
   if (write_file) fs.close();
   rrg.clearFastFunc();
   
-  return output;
+  return sum_stats;
 }
