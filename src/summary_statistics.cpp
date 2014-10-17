@@ -17,6 +17,11 @@ List initSumStats(const Forest &forest) {
       names(i) = "tmrca";
     }
     
+    else if (typeid(*sum_stat) == typeid(NewickTree)) {
+      sum_stats(i) = List(forest.model().loci_number());
+      names(i) = "trees";
+    }
+    
     else stop("Failed to parse unknown Summary Statistic.");
   }
 
@@ -44,6 +49,7 @@ void addLocusSumStats(const Forest &forest, size_t locus, List &sum_stats) {
     else if (typeid(*sum_stat) == typeid(TMRCA)) {
       TMRCA* tmrca = dynamic_cast<TMRCA*>(sum_stat); 
 
+      // These two are only references.
       std::vector<double> const tmrca_vec = tmrca->tmrca();
       std::vector<double> const tree_length_vec = tmrca->tree_length();
       
@@ -58,5 +64,9 @@ void addLocusSumStats(const Forest &forest, size_t locus, List &sum_stats) {
       as<List>(sum_stats[i])[locus] = mat;
     }
     
+    else if (typeid(*sum_stat) == typeid(NewickTree)) {
+      NewickTree* nt = dynamic_cast<NewickTree*>(sum_stat);
+      as<List>(sum_stats[i])[locus] = nt->getTrees();
+    }
   }
 }

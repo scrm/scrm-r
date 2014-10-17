@@ -24,9 +24,12 @@
 #define scrmr_summary_statistics
 
 #include <Rcpp.h>
+#include <vector>
+#include <string>
 #include "scrm/summary_statistics/summary_statistic.h"
 #include "scrm/summary_statistics/seg_sites.h"
 #include "scrm/summary_statistics/tmrca.h"
+#include "scrm/summary_statistics/newick_tree.h"
 
 using namespace Rcpp;
 
