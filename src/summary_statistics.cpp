@@ -43,11 +43,20 @@ void addLocusSumStats(const Forest &forest, size_t locus, List &sum_stats) {
     
     else if (typeid(*sum_stat) == typeid(TMRCA)) {
       TMRCA* tmrca = dynamic_cast<TMRCA*>(sum_stat); 
-      NumericMatrix mat(forest.segment_count(), 2);
+
+      std::vector<double> const tmrca_vec = tmrca->tmrca();
+      std::vector<double> const tree_length_vec = tmrca->tree_length();
+      
+      NumericMatrix mat(tmrca_vec.size(), 2);
+      for (size_t i = 0; i < tmrca_vec.size(); ++i) {
+        mat(i,0) = tmrca_vec.at(i);
+        mat(i,1) = tree_length_vec.at(i);
+      }
 
       mat.attr("dimnames") = 
         List::create(R_NilValue, CharacterVector::create("tmrca", "tree_length"));
       as<List>(sum_stats[i])[locus] = mat;
     }
+    
   }
 }

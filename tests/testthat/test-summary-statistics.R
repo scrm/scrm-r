@@ -34,10 +34,10 @@ test_that("TMRCA import works", {
   expect_is(sum_stats$tmrca, 'list')
   expect_equal(length(sum_stats$tmrca), 3)
   
-  expect_is(sum_stats$tmrca[[1]], 'matrix')
-  expect_is(sum_stats$tmrca[[2]], 'matrix')
-  expect_is(sum_stats$tmrca[[3]], 'matrix')
-  expect_equal(ncol(sum_stats$tmrca[[1]]), 2)
-  expect_equal(ncol(sum_stats$tmrca[[2]]), 2)
-  expect_equal(ncol(sum_stats$tmrca[[3]]), 2)
+  for (tmrca in sum_stats$tmrca) {
+    expect_is(tmrca, 'matrix')
+    expect_equal(ncol(tmrca), 2)
+    expect_that(nrow(tmrca), is_more_than(0))
+    expect_true(all(tmrca > 0))
+  }
 })
