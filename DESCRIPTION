@@ -2,7 +2,7 @@ Package: scrm
 Type: Package
 Title: Simulate the Evolution of Biological Sequences
 Version: 1.2-0
-Date: 2014-09-10
+Date: 2014-10-20
 Authors@R: c( person('Paul', 'Staab', , 'develop@paulstaab.de', role=c('aut',
     'cre', 'cph')), person('Zhu', 'Sha', role=c('aut', 'cph')), person('Dirk',
     'Metzler', role='ths'), person('Gerton', 'Lunter', role=c('aut', 'cph',
@@ -14,10 +14,14 @@ Description: The Sequential Coalescent with Recombination Model (SCRM) is an
     The program scrm is an implementation of this model that is designed to
     act as an drop-in replacement for the widely adopted coalescent simulator
     ms. This package contains scrm along with a convinient R interface.
+URL: https://github.com/scrm/scrm-r
 License: GPL (>= 3)
 Suggests:
-    testthat (>= 0.9.0)
+    testthat (>= 0.9.0),
+    knitr,
+    ape
 Imports:
     Rcpp (>= 0.11.2)
+VignetteBuilder: knitr
 SystemRequirements: C++11
 LinkingTo: Rcpp
