@@ -1,0 +1,96 @@
+---
+title: "Command Line Arguments"
+author: "Paul Staab"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{scrm-Arguments}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+scrm is uses a syntax compatible with the popular program [ms][1]. There are, however, a few differences to ms: 
+
+* scrm can not simulate 
+    * gene conversions (`-c` in ms) and
+    * a fix number of segregating sites (`-s`),
+* the option `-L` produces a slightly different output and
+* it additionally implements the flags 
+    * `-l` (approximation), 
+    * `-sr` (changing recombination rate), 
+    * `-st` (changing mutation rate),
+    * `-eI` (sampling at past time points) and
+    * `-oSFS` (generates frequency spectra). 
+    
+For all other options, you can also refer to [ms' manual][2] to get a detailed description of what the commands are doing. scrm should happily execute any ms command that does not contain `-c` and `-s`. Also scrm has somewhat stricter requirements regarding the order of arguments if population admixture (`-es`) is involved.
+
+## General Syntax
+The command line options for scrm look like
+
+    scrm <nsamp> <rep> [...]
+
+where _nsamp_ is the total number of samples taken (in all populations and at all times), _rep_ is the number of independent loci/chromosomes to generate and the `[...]` is an optional placeholder for an arbitrary number of command flags described below.
+
+## Basic Parameters
+
+### Recombination
+
+* `-r <R> <L>`: Set the recombination rate to _R = 4*N0*r_ and the length of all loci to L base pairs. _r_ is the recombination rate per locus.
+* `-l <l>`: Use approximation rather than simulating the exact ARG. Within a sliding window of length _l_ base pairs all linkage information is considered when building the genealogy. To positions outside of this window, some linkage  is ignored. Setting _l=0_ produces the SMC' and _l=-1_ or _l>L_ deactivates the approximation. 
+
+### Population structure & migration
+In all commands, migrations rates _M = 4*N0*m_, where _m_ is the fraction of a population that is replaced with migrants from other populations each generation (looking forwards in time).
+
+* `-I <npop> <s1> ... <sn> [<M>]`: Use an island model with _npop_ populations, where _s1_ to _sn_ individuals are sampled from population 1 to n, respectively. Optionally assume a symmetric migration rate of _M_.
+* `-M <M>`: Assume a symmetric migration rate of _M/(npop-1)_. 
+* `-m <i> <j> <M>`: Set the migration rate from population _j_ to population _i_ to _M_ (looking forward in time).
+* `-ma <M11> <M21> ... <M21> ...`: Set the migration matrix (Dimension is _npop x npop_). Diagonals elements are ignored but required.  
+
+### Population size changes
+* `-n <i> <n>`: Set the present day size of population _i_ to _n*N0_.
+* `-G <a>`: Set the exponential growth rate of all populations to _a_.
+* `-g <i> <a>`: Set the exponential growth rate of population _i_ to _a_.
+
+### Summary Statistics
+
+* `-t <$\theta$>`: Set the mutation rate to `$\theta = 4N_0u$`, we _u_ is the neutral mutation rate per locus. If this options is given, scrm generates the segregating sites output.
+* `-T`: Output the local genealogies in newick format.
+* `-O`: Output the local genealogies in the `oriented forest` format as described in [Kelleher _et al._ (2014)](http://dx.doi.org/10.1016/j.tpb.2014.05.001).
+* `-L`: Output the TMRCA and the local tree length for each segment (behaves different to ms).
+* `-oSFS`: Outputs the the site frequency spectrum. Requires that the mutation rate $\theta$ is given with the '-t' option.
+
+### Reproducibility
+
+* `-seed <SEED> [<SEED2> <SEED3>]`: Specifies a seed for the simulation. You can input up to three non-negative numbers. If no seed is given, scrm randomly samples one using entropy provided by the operating system. To reproduce a previous simulation, use the single number in the second line of the output.
+
+## Time specific parameters
+The command this section all have a time _t_ as first parameter. Changes made by the commands affect the time from _t_ further back into the past. All times in units of _4*N0_ generations.
+
+### Population structure & migration
+
+* `-eI <t> <s1> ... <sn>`: Sample _s1_ to _sn_ individuals are from population _1_ to _n_, respectively, at time _t_. 
+* `-eM <t> <M>`: Assume a symmetric migration rate of _M/(npop-1)_ at time _t_.
+* `-em <t> <i> <j> <M>`: Set the migration rate from population _j_ to population _i_ to _M_ (looking forward in time) at time _t_.
+* `-ema <npop> <M11> <M12> ... <M21> ...`: Set the migration matrix (Dimension is _npop x npop_). Diagonals elements are ignored but required.  
+
+### Population size changes
+
+* `-eN <t> <n>`: Set the size of all populations to _n*N0_ at time _t_.
+* `-en <t> <i> <n>`: Set the size of population _i_ to _n*N0_ at time _t_. 
+* `-eg <t> <i> <a>`: Set the exponential growth rate of population _i_ to _a_ at time _t_.
+* `-eG <t> <a>`: Set the exponential growth rate of all populations to _a_ at time _t_.
+
+### Population Splits & Merges
+
+* `-es <t> <i> <p>`: Population admixture, replaces a fraction of _1-p_ of population _i_ with individuals a from population _npop + 1_ which is ignored afterwards (viewed forward in time). Technically (and looking backwards in time), a new population _n+1_ with size _N0_ is created. Migration (to & from) and growth rates for this population are initially 0. Each lines in population _i_ is moved to the new population with probability _1-p_. Please sort multiple `-es` arguments by their time to avoid confusion about the numbering of populations. Please give the arguments that affect the whole population (`-M`, `-N`, `-G` & `-ma`) before giving the first `-es`. Also, their timed equivalents (`-eM`, `-eN`, `-eG`, `-eI` & `-ema`) position on the command line events must be the same as in time (only relative to `-es`). 
+`scrm` throws an error if any of these conditions is not met. In doubt, just sort all command line arguments by time.
+* `-ej <t> <i> <j>`: Adds a specialization event in population _i_ that creates population _j_ (forwards in time). Technically (and looking backwards in time), it merges population _j_ into population _i_ at time _t_. Migration rates into population _j_ are set to 0 for the time further back into the past.
+ 
+## Sequence specific parameters
+The following commands change the model parameters from at a sequence position _s_.
+
+* `-sr <s> <R>`: Set the recombination rate to _R_ starting at position _s_.
+* `-st <s> <$\theta$>`: Set the mutation rate to $\theta$ starting at position _s_. 
+
+[1]: http://home.uchicago.edu/~rhudson1/source/mksamples.html
+[2]: https://webshare.uchicago.edu/users/rhudson1/Public/ms.folder/msdoc.pdf?ticket=t_DunQ7c99
