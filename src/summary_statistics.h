@@ -31,6 +31,7 @@
 #include "scrm/summary_statistics/tmrca.h"
 #include "scrm/summary_statistics/newick_tree.h"
 #include "scrm/summary_statistics/oriented_forest.h"
+#include "scrm/summary_statistics/frequency_spectrum.h"
 
 using namespace Rcpp;
 

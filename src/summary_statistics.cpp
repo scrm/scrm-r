@@ -26,6 +26,12 @@ List initSumStats(const Forest &forest) {
       sum_stats(i) = List(forest.model().loci_number());
       names(i) = "oriented_forest";
     }
+
+    else if (typeid(*sum_stat) == typeid(FrequencySpectrum)) {
+      sum_stats(i) = NumericMatrix(forest.model().loci_number(), 
+                                   forest.model().sample_size() - 1);
+      names(i) = "sfs";
+    }
     
     else stop("Failed to parse unknown Summary Statistic.");
   }
@@ -77,6 +83,14 @@ void addLocusSumStats(const Forest &forest, size_t locus, List &sum_stats) {
     else if (typeid(*sum_stat) == typeid(OrientedForest)) {
       OrientedForest* of = dynamic_cast<OrientedForest*>(sum_stat);
       as<List>(sum_stats[i])[locus] = of->getTrees();
+    }
+    
+    else if (typeid(*sum_stat) == typeid(FrequencySpectrum)) {
+      FrequencySpectrum* sfs = dynamic_cast<FrequencySpectrum*>(sum_stat);
+      std::vector<size_t> sfs_vec = sfs->sfs();
+      for (size_t j = 0; j < sfs_vec.size(); ++j) {
+        as<NumericMatrix>(sum_stats[i])(locus,j) = sfs_vec.at(j);
+      }
     }
   }
 }

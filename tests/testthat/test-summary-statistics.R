@@ -77,3 +77,14 @@ test_that("Oriented Forest import works", {
     expect_that(nchar(tree), is_more_than(3))
   }
 })
+
+test_that("Frequency spectrum import works", {
+  sum_stats <- scrm('7 5 -r 1 100 -t 5 -oSFS')
+  expect_is(sum_stats, "list")
+  expect_is(sum_stats$sfs, 'matrix')
+  expect_equal(nrow(sum_stats$sfs), 5)
+  expect_equal(ncol(sum_stats$sfs), 6)
+  for (i in 1:nrow(sum_stats$sfs)) {
+    expect_equal(sum(sum_stats$sfs[i,]), ncol(sum_stats$seg_sites[[i]]))
+  }
+})
