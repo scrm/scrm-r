@@ -1,0 +1,38 @@
+---
+title: "Simulating trees for ape"
+author: "Paul Staab"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{scrm-TreesForApe}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+```{r echo=FALSE}
+set.seed(40)
+```
+
+The trees in 'newick' format produced by __scrm's__ `-T` option are compatible 
+with the `read.tree` function from package 'ape'. This quick example shows how
+we can exploid this to visualize the Ancestral Recombination Graph (ARG) 
+simulated with __scrm__.
+
+
+First, we call __scrm__ to simulate the ARG:
+
+```{r}
+library(scrm)
+sum_stats <- scrm('5 1 -r 1.5 100 -T')
+```
+
+Now we can convert the trees into ape's internal format using `read.tree`:
+```{r}
+library(ape)
+trees <- read.tree(text = sum_stats$trees[[1]])
+```
+
+And -- for example -- print the trees:
+```{r, fig.align='center'}
+plot(trees, no.margin=TRUE)
+```
