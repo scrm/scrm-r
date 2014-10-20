@@ -7,13 +7,7 @@ Authors@R: c( person('Paul', 'Staab', , 'develop@paulstaab.de', role=c('aut',
     'cre', 'cph')), person('Zhu', 'Sha', role=c('aut', 'cph')), person('Dirk',
     'Metzler', role='ths'), person('Gerton', 'Lunter', role=c('aut', 'cph',
     'ths')) )
-Description: The Sequential Coalescent with Recombination Model (SCRM) is an
-    approximation of the Ancestral Recombination Graph. It can be used to
-    simulate the neutral evolution of chromosomes/biological sequences
-    subject to possibly complicated population structure.
-    The program scrm is an implementation of this model that is designed to
-    act as an drop-in replacement for the widely adopted coalescent simulator
-    ms. This package contains scrm along with a convinient R interface.
+Description: tbr - Short and catchy one-liner?
 URL: https://github.com/scrm/scrm-r
 License: GPL (>= 3)
 Suggests:

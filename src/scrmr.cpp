@@ -22,7 +22,7 @@ bool write_file;
 //' 
 //' This function provides an interface for calling \emph{scrm} from R.
 //' The command line options are passed via the \code{args} argument.
-//' The vignette 'scrm_arguments' contains details about the available options.
+//' The vignette 'scrm-Arguments' contains details about the available options.
 //' Summary statistics are converted into an R format. Additionally, there
 //' is an option to write the original command line output into a file. 
 //' 
@@ -42,6 +42,13 @@ bool write_file;
 //'         For the site frequency spectrum, the summary statistic is a matrix,
 //'         where each row contains the spectrum for one locus.
 //' @export
+//' @keywords datagen
+//' @seealso
+//' \itemize{
+//'   \item \code{vignette('scrm-Arguments')} for an overview of commandline arguments and
+//'   \item \code{vignette('scrm-TreesForApe')} for an example on using 
+//'         genealogies simulated with \emph{scrm} with package 'ape'.
+//' }
 //' @examples
 //' # 5 Chromosomes with 100 bases each with recombination and mutation
 //' sum_stats <- scrm('5 1 -r 5 100 -t 5 -T -L')
@@ -51,6 +58,7 @@ bool write_file;
 //' # 10 Chromosomes of 1Mb length are sampled from two populations with 
 //' # migration inbetween.
 //' scrm('10 3 -r 400 1000000 -l 100000 -I 2 4 6 0.5 -t 300 -oSFS')$sfs
+//'
 // [[Rcpp::export]]
 List scrm(std::string args, std::string file = "") {
  

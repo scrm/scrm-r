@@ -21,7 +21,7 @@ A named list of summary statistics. Most summary statistics are
 \description{
 This function provides an interface for calling \emph{scrm} from R.
 The command line options are passed via the \code{args} argument.
-The vignette 'scrm_arguments' contains details about the available options.
+The vignette 'scrm-Arguments' contains details about the available options.
 Summary statistics are converted into an R format. Additionally, there
 is an option to write the original command line output into a file.
 }
@@ -43,4 +43,12 @@ str(sum_stats)
 # migration inbetween.
 scrm('10 3 -r 400 1000000 -l 100000 -I 2 4 6 0.5 -t 300 -oSFS')$sfs
 }
+\seealso{
+\itemize{
+  \item \code{vignette('scrm-Arguments')} for an overview of commandline arguments and
+  \item \code{vignette('scrm-TreesForApe')} for an example on using
+        genealogies simulated with \emph{scrm} with package 'ape'.
+}
+}
+\keyword{datagen}
 
