@@ -25,20 +25,12 @@
 
 #include <vector>
 #include <iostream>
-#include <iomanip>      
 #include <string>
-#include <sstream>
-#include <fstream>
-#include <iostream>
-#include <stdlib.h>  
-#include <stdio.h>
 #include <stdexcept>
-#include <memory>
 
 #include "model.h"
 #include "summary_statistics/summary_statistic.h"
 #include "summary_statistics/tmrca.h"
-#include "summary_statistics/first_last_tmrca.h"
 #include "summary_statistics/seg_sites.h"
 #include "summary_statistics/frequency_spectrum.h"
 #include "summary_statistics/newick_tree.h"
@@ -54,12 +46,14 @@ class Param {
   Param() : argc_(0), argv_(NULL) { init(); }
   Param(const std::string &arg);
   Param(int argc, char *argv[], bool directly_called=true) : 
-      argc_(argc), argv_(argv), directly_called_(directly_called) {
-        init();
+    argc_(argc), argv_(argv), directly_called_(directly_called) {
+    init();
   }
 
   ~Param() {
-    for (char* arg : argv_vec_) delete arg;
+    for (size_t i = 0; i < argv_vec_.size(); ++i) {
+      delete[] argv_vec_[i];
+    }
   }
  
   /** Move Operator */

@@ -20,32 +20,24 @@
 
 */
 
-#ifndef scrm_src_summary_statistic_first_last_tmrca
-#define scrm_src_summary_statistic_first_last_tmrca
+#ifndef scrmr_summary_statistics
+#define scrmr_summary_statistics
 
-#include <sstream>
-#include <iostream>
+#include <Rcpp.h>
+#include <vector>
+#include <string>
+#include "scrm/summary_statistics/summary_statistic.h"
+#include "scrm/summary_statistics/seg_sites.h"
+#include "scrm/summary_statistics/tmrca.h"
+#include "scrm/summary_statistics/newick_tree.h"
+#include "scrm/summary_statistics/oriented_forest.h"
+#include "scrm/summary_statistics/frequency_spectrum.h"
 
-#include "summary_statistic.h"
-#include "../forest.h"
+using namespace Rcpp;
 
-class FirstLastTMRCA : public SummaryStatistic
-{
- public:
-   FirstLastTMRCA() {
-    first_tmrca_ = -1;
-    last_tmrca_ = -1; 
-   };
-   ~FirstLastTMRCA() {};
 
-   //Virtual methods
-   void calculate(const Forest &forest);
-   void printSegmentOutput(std::ostream &output) { (void)output; }
-   void printLocusOutput(std::ostream &output);
+List initSumStats(const Forest &forest);
+void addLocusSumStats(const Forest &forest, size_t locus, List &sum_stats);
 
- private:
-   std::ostringstream output_buffer_;
-   double first_tmrca_, last_tmrca_;
-};
 
 #endif

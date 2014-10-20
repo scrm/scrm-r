@@ -36,6 +36,7 @@ Param::Param(const std::string &arg) {
   }
   argv_vec_.push_back(0);
 
+  directly_called_ = true;
   argv_ = &argv_vec_[0];
   argc_ = argv_vec_.size() - 1;
   init();
@@ -67,8 +68,7 @@ void Param::parse(Model &model) {
   // be added in the correct order.
   SegSites* seg_sites = NULL;
   bool tmrca = false,
-       first_last_tmrca = false,
-       trees = false,
+       newick_trees = false,
        orientedForest = false,
        sfs = false; 
 
@@ -294,29 +294,31 @@ void Param::parse(Model &model) {
     // ------------------------------------------------------------------
     // Summary Statistics
     // ------------------------------------------------------------------
-    else if (argv_i == "-T" || argv_i == "-Tfs"){
-      trees = true;
-    }
-
-    else if (argv_i == "-Tifs"){
-      trees = true;
-      model.set_finite_sites(false);
+    else if (argv_i == "-T") {
+      newick_trees = true;
     }
 
     else if (argv_i == "-O"){
       orientedForest = true;
     }
-    
-    else if (argv_i == "-L"){
+
+    else if (argv_i == "-SC" || argv_i == "--SC") {
+      std::string tmp_string = readNextInput<std::string>();
+      if (tmp_string.compare("rel") == 0) model.setSequenceScaling(relative);
+      else if (tmp_string.compare("abs") == 0) model.setSequenceScaling(absolute);
+      else if (tmp_string.compare("ms") == 0) model.setSequenceScaling(ms);
+      else throw 
+        std::invalid_argument(std::string("Unknown sequence scaling argument: ") +
+                              tmp_string +
+                              std::string(". Valid are 'rel', 'abs' or 'ms'."));
+    }
+
+    else if (argv_i == "-L") {
       tmrca = true;
     }
 
-    else if (argv_i == "-oSFS"){
+    else if (argv_i == "-oSFS") {
       sfs = true;
-    }
-
-    else if (argv_i == "-oFLTMRCA"){
-      first_last_tmrca = true;
     }
 
     // ------------------------------------------------------------------
@@ -385,10 +387,9 @@ void Param::parse(Model &model) {
   }
 
   // Add summary statistics in order of their output
-  if (trees) model.addSummaryStatistic(new NewickTree());
-  if (orientedForest) model.addSummaryStatistic(new OrientedForest());
+  if (newick_trees) model.addSummaryStatistic(new NewickTree());
+  if (orientedForest) model.addSummaryStatistic(new OrientedForest(model.sample_size()));
   if (tmrca) model.addSummaryStatistic(new TMRCA());
-  if (first_last_tmrca) model.addSummaryStatistic(new FirstLastTMRCA());
   if (seg_sites != NULL) model.addSummaryStatistic(seg_sites);
   if (sfs) {
     if (seg_sites == NULL) 

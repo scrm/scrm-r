@@ -4,3 +4,6 @@
 *.o
 *.so
 *.dll
+src/symbols.rds
+
+*.html

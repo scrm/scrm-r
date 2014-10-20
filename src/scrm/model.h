@@ -42,11 +42,12 @@
 #include <stdexcept>
 #include <cassert>
 #include <cmath>
-#include <memory>
 
 #include "summary_statistics/summary_statistic.h"
 
 class Param;
+
+enum SeqScale { relative, absolute, ms };
 
 class Model
 {
@@ -120,14 +121,6 @@ class Model
     * @return length of all loci, in base pairs
     */
    size_t loci_length() const { return loci_length_; }
-
-   /**
-    * @brief Whether recombinations can occur only on finitely many sites, or
-    * everywhere along the sequence.
-    *
-    * @return A bool indicating the finite sites status of the model.
-    */
-   bool finite_sites() const { return finite_sites_; };
 
    /**
     * @brief Getter for the current growth rate of a subpopulation
@@ -283,8 +276,6 @@ class Model
     if (pop_number_<1) throw std::out_of_range("Population number out of range"); 
    }
 
-   void set_finite_sites(const bool &finite_sites) { finite_sites_ = finite_sites; };
-
    void resetTime() { 
      current_pop_sizes_ = pop_sizes_list_.at(0);
      current_growth_rates_ = growth_rates_list_.at(0);
@@ -370,19 +361,18 @@ class Model
      return summary_statistics_.size(); 
    }
 
-   std::shared_ptr<SummaryStatistic> getSummaryStatistic(const size_t i) const {
+   SummaryStatistic* getSummaryStatistic(const size_t i) const {
      return summary_statistics_.at(i);
    }
 
    void addSummaryStatistic(SummaryStatistic* sum_stat) {
-     summary_statistics_.push_back(std::shared_ptr<SummaryStatistic>(sum_stat));
-   }
-
-   void addSummaryStatistic(std::shared_ptr<SummaryStatistic> sum_stat) {
      summary_statistics_.push_back(sum_stat);
    }
 
   void addPopulation();
+
+  SeqScale getSequenceScaling() const { return seq_scale_; }
+  void setSequenceScaling(SeqScale seq_scale) { seq_scale_ = seq_scale; };
 
   private:
    std::vector<double> change_times_;
@@ -482,9 +472,9 @@ class Model
 
    size_t exact_window_length_;
 
-   bool finite_sites_;
+   SeqScale seq_scale_;
 
-   std::vector<std::shared_ptr<SummaryStatistic> > summary_statistics_;
+   std::vector<SummaryStatistic*> summary_statistics_;
 };
 
 
