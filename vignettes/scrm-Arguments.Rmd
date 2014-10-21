@@ -53,11 +53,12 @@ In all commands, migrations rates _M = 4*N0*m_, where _m_ is the fraction of a p
 
 ### Summary Statistics
 
-* `-t <$\theta$>`: Set the mutation rate to `$\theta = 4N_0u$`, we _u_ is the neutral mutation rate per locus. If this options is given, scrm generates the segregating sites output.
-* `-T`: Output the local genealogies in newick format.
-* `-O`: Output the local genealogies in the `oriented forest` format as described in [Kelleher _et al._ (2014)](http://dx.doi.org/10.1016/j.tpb.2014.05.001).
-* `-L`: Output the TMRCA and the local tree length for each segment (behaves different to ms).
-* `-oSFS`: Outputs the the site frequency spectrum. Requires that the mutation rate $\theta$ is given with the '-t' option.
+* `-t < $\theta$ >`: Set the mutation rate to $\theta = 4N_0u$, where _u_ is the neutral mutation rate per locus. If this options is given, scrm generates the segregating sites output.
+* `-T`: Print the local genealogies in newick format.
+* `-O`: Print the local genealogies in the `oriented forest` format as described in [Kelleher _et al._ (2014)](http://dx.doi.org/10.1016/j.tpb.2014.05.001) [since v1.2].
+* `-L`: Print the TMRCA and the local tree length for each segment (behaves different to ms).
+* `-oSFS`: Print the site frequency spectrum. Requires that the mutation rate $\theta$ is given with the '-t' option.
+* `-SC [ms|rel|abs]`: Scaling of sequence positions. Either relative to the locus length between 0 and 1 (`rel`), absolute in base pairs (`abs`) or `ms`'s scaling (default) where the positions in the _segregating sites_ output are relative, and the positions in the trees output are absolute (`ms`)[since v1.3]. 
 
 ### Reproducibility
 
