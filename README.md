@@ -3,12 +3,12 @@ scrm-r
 
 [![Build Status](https://travis-ci.org/scrm/scrm-r.svg?branch=master)](https://travis-ci.org/scrm/scrm-r)
 
-__scrm__, packaged for convenient usage in R.
+_scrm_, packaged for convenient usage in R.
 
 
 Installation
 ======================
-_This packages requires an R version of `3.1.0` or higher._
+__This packages requires an R version of `3.1.0` or higher.__
 
 It is recommended to use the current CRAN version. It can be installed
 from within R using
