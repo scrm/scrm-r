@@ -1,7 +1,8 @@
+[![Build Status](https://travis-ci.org/scrm/scrm-r.svg?branch=master)](https://travis-ci.org/scrm/scrm-r)
+[![DOI](https://zenodo.org/badge/6744/scrm/scrm-r.png)](http://dx.doi.org/10.5281/zenodo.12351)
+
 R Package scrm
 =======================
-
-[![Build Status](https://travis-ci.org/scrm/scrm-r.svg?branch=master)](https://travis-ci.org/scrm/scrm-r)
 
 _scrm_ is a fast and accurate coalescence simulator for the evolution 
 of biological sequences. It is available as a command line program at
@@ -58,3 +59,4 @@ Versioning
 The R package has a version of format `x.y-z`. `x.y` is the version 
 of _scrm_ included in the package, and `z` is the number of CRAN releases 
 for this _scrm_ version, starting at `1` (`0` is used for development only).
+
