@@ -7,9 +7,8 @@ Authors@R: c( person('Paul', 'Staab', , 'develop@paulstaab.de', role=c('aut',
     'cre', 'cph')), person('Zhu', 'Sha', role=c('aut', 'cph')), person('Dirk',
     'Metzler', role='ths'), person('Gerton', 'Lunter', role=c('aut', 'cph',
     'ths')) )
-Description: 
-    A coalescent simulator that allows the rapid simulation of biological 
-    sequences under neutral models of evolution.
+Description: A coalescent simulator that allows the rapid simulation of
+    biological sequences under neutral models of evolution.
 URL: https://github.com/scrm/scrm-r
 License: GPL (>= 3)
 Suggests:
