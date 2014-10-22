@@ -11,6 +11,8 @@ Description: A coalescent simulator that allows the rapid simulation of
     biological sequences under neutral models of evolution.
 URL: https://github.com/scrm/scrm-r
 License: GPL (>= 3)
+Depends:
+    R (>= 3.1.0)
 Suggests:
     testthat (>= 0.9.0),
     knitr,
