@@ -46,8 +46,10 @@ Help & Documentation
 
 Bug Reports
 =======================
-Please report an problems with _scrm_ at its 
+Please report problems with _scrm_ using its 
 [issue tracker](https://github.com/scrm/scrm-r/issues). 
+Please include the version you are using and the exact command that 
+causes the problem including seed (if applicable) in the report.
 Also, feel free to suggest features you would like to see in _scrm_ there.
 
 
