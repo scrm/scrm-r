@@ -3,19 +3,31 @@ scrm-r
 
 [![Build Status](https://travis-ci.org/scrm/scrm-r.svg?branch=master)](https://travis-ci.org/scrm/scrm-r)
 
-scrm as an R package. 
+__scrm__, packaged for convenient usage in R.
 
-
-Status
-======================
-Basically working, but still under heavy development. Will be released on CRAN
-once the `cran-release` target is hit.
 
 Installation
 ======================
+_This packages requires an R version of `3.1.0` or higher._
+
+It is recommended to use the current CRAN version. It can be installed
+from within R using
+
+```
+install.packages('scrm')
+```
+
 The development version can be installed from GitHub using
 ```
 devtools::install_github('scrm/scrm-r')
+```
+
+Usage
+======================
+Use the function `scrm::scrm()` to call _scrm_:
+```
+library('scrm')
+sum_stats <- scrm('5 1 -r 10 100 -t 5 -oSFS')
 ```
 
 Versioning
