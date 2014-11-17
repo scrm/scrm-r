@@ -9,6 +9,8 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
+# Simulating trees for ape
+
 ```{r echo=FALSE}
 set.seed(40)
 ```

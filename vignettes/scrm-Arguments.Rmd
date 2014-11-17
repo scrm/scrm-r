@@ -9,6 +9,8 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
+# Command Line Arguments
+
 scrm is uses a syntax compatible with the popular program [ms][1]. There are, however, a few differences to ms: 
 
 * scrm can not simulate 
