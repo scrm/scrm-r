@@ -65,7 +65,8 @@ List scrm(std::string args, std::string file = "") {
   /** Open a file for writing if 'file' is given */
   if (file.length() > 0) {
     fs.open(file);
-    if(!fs) stop(std::string("Failed writing to file ") + file);
+    if(!fs) stop(std::string("Failed to write the file '") + file +
+                 std::string("'! Does the directory exist?"));
     write_file = true;
   } else {
     write_file = false;

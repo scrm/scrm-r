@@ -35,4 +35,29 @@ test_that("writing into a file works", {
   expect_equal(output[2], "//")
   expect_true(output[3] != '')
   unlink(file)
+  
+  # Test relative path
+  work_dir <- getwd()
+  setwd(tempdir())
+  file <- 'scrm_test_file'
+  scrm('10 1 -t 5', file = file)
+  expect_true(file.exists(file))
+  expect_true(file.exists(paste(tempdir(), file, sep='/')))
+  unlink(file)
+  
+  # Test with '//' instead of '/'
+  file <- 'scrm_test_dir//scrm_test_file'
+  expect_error(scrm('10 1 -t 5', file = file))
+  dir.create('scrm_test_dir')
+  scrm('10 1 -t 5', file = file)
+  expect_true(file.exists(file))
+  expect_true(file.exists(paste(tempdir(), file, sep='/')))  
+  
+  # Test with '\' instead of '/'
+  file <- 'scrm_test_dir\\scrm_test_file2'
+  scrm('10 1 -t 5', file = file)
+  expect_true(file.exists(file))
+  expect_true(file.exists(paste(tempdir(), file, sep='/')))    
+  unlink('scrm_test_dir', recursive = TRUE)
+  setwd(work_dir)
 })
