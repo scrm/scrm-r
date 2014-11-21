@@ -61,24 +61,24 @@ bool write_file;
 //'
 // [[Rcpp::export]]
 List scrm(std::string args, std::string file = "") {
- 
-  /** Open a file for writing if 'file' is given */
-  if (file.length() > 0) {
-    fs.open(file);
-    if(!fs) stop(std::string("Failed to write the file '") + file +
-                 std::string("'! Does the directory exist?"));
-    write_file = true;
-  } else {
-    write_file = false;
-  }
-  
+
   /** Parse args and generate the model */
   Param param("scrm " + args);
-  if (write_file) fs << param << std::endl;
   Model model;
   param.parse(model);
   
   RRandomGenerator rrg;
+  
+  /** Open a file for writing if 'file' is given */
+  if (file.length() > 0) {
+    fs.open(file);
+    if(!fs.is_open()) stop(std::string("Failed to write the file '") + file +
+                           std::string("'! Does the directory exist?"));
+    write_file = true;
+    fs << param << std::endl;
+  } else {
+    write_file = false;
+  }
   
   /** Throw a warning if -seed argmuent is used */
   Function warning("warning");
@@ -91,7 +91,7 @@ List scrm(std::string args, std::string file = "") {
   
   Forest forest = Forest(&model, &rrg);
   List sum_stats = initSumStats(forest);
-  
+
   // Loop over the independent loci/chromosomes
   for (size_t rep_i=0; rep_i < model.loci_number(); ++rep_i) {
     
