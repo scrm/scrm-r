@@ -62,7 +62,7 @@ test_that("writing into a file works", {
   setwd(work_dir)
 })
 
-test_that("-m & -em Works", {
+test_that("-m & -em are available", {
   sum_stats <- scrm('10 1 -I 2 6 4 -em 1.0 2 1 0.5 -em 1.0 1 2 0.7 -T')
   expect_equal(length(sum_stats$trees), 1)  
   sum_stats <- scrm('10 1 -I 2 6 4 -m 2 1 0.5 -m 1 2 0.7 -T')
