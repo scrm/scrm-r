@@ -8,7 +8,12 @@ Authors@R: c( person('Paul', 'Staab', , 'develop@paulstaab.de', role=c('aut',
     'Metzler', role=c('aut', 'cph', 'ths')), person('Gerton', 'Lunter',
     role=c('aut', 'cph', 'ths')) )
 Description: A coalescent simulator that allows the rapid simulation of
-    biological sequences under neutral models of evolution.
+    biological sequences under neutral models of evolution. Different to
+    other coalescent based simulations, scrm has an optional approximation
+    parameter that allows for high accuracy while maintaining a linear runtime
+    cost for long sequences. It is optimized for simulating massive datasets as
+    produced by Next-Generation Sequencing technologies for up to several ten-thousand
+    sequences.
 URL: https://github.com/scrm/scrm-r
 License: GPL (>= 3)
 Depends:
