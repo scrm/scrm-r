@@ -81,13 +81,12 @@ List scrm(std::string args, std::string file = "") {
   }
   
   /** Throw a warning if -seed argmuent is used */
-  Function warning("warning");
   if (param.random_seed() != -1) 
-    warning("Ignoring Seed argument. Set a seed in R.");
+    Rf_warning("Ignoring Seed argument. Set a seed in R.");
   
   /** Throw a warning if no summary statistics are used */
   if (model.countSummaryStatistics() == 0)
-    warning("No summary statisics specified. No output will be produced.");
+    Rf_warning("No summary statisics specified. No output will be produced.");
   
   Forest forest = Forest(&model, &rrg);
   List sum_stats = initSumStats(forest);
