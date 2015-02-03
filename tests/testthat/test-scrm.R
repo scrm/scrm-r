@@ -1,5 +1,6 @@
 context("scrm")
 
+
 test_that("parsing arguments works", {
   expect_error(scrm('10 -t 5'))
   expect_error(scrm('10 1 -t'))
@@ -13,6 +14,7 @@ test_that("parsing arguments works", {
   scrm('10 1 -oSFS -t 2')
 })
 
+
 test_that("runs a reproducible", {
   set.seed(119)
   res1 <- scrm('10 1 -r 1 100 -t 2')
@@ -21,10 +23,12 @@ test_that("runs a reproducible", {
   expect_equal(res1, res2)
 })
 
+
 test_that("warning is given when using -seed", {
   expect_warning(scrm('10 1 -seed 17 -L'))
   expect_warning(scrm('10 1 -seed 1 2 3 -L'))
 })
+
 
 test_that("writing into a file works", {
   file <- tempfile('scrm_')
@@ -62,9 +66,21 @@ test_that("writing into a file works", {
   setwd(work_dir)
 })
 
+
 test_that("-m & -em are available", {
   sum_stats <- scrm('10 1 -I 2 6 4 -em 1.0 2 1 0.5 -em 1.0 1 2 0.7 -T')
   expect_equal(length(sum_stats$trees), 1)  
   sum_stats <- scrm('10 1 -I 2 6 4 -m 2 1 0.5 -m 1 2 0.7 -T')
   expect_equal(length(sum_stats$trees), 1)
+})
+
+
+test_that('printing help & verison information works', {
+  for (version in list(scrm('-v'), scrm('--version'))) {
+    expect_that(version, is_a('list'))
+    expect_that(version$version, is_a('character'))
+  }
+  
+  expect_error(scrm('-h'))
+  expect_error(scrm('--help'))
 })
