@@ -67,6 +67,12 @@ List scrm(std::string args, std::string file = "") {
   Model model;
   param.parse(model);
   
+  // Print help or version information if user asked for it
+  if (param.help()) stop("Please use '?scrm' for help");
+  if (param.version()) {
+    return List::create(_("version") = VERSION);
+  }
+  
   RRandomGenerator rrg;
   
   /** Open a file for writing if 'file' is given */
