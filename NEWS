@@ -1,29 +1,35 @@
+scrm 1.3.3.9002
+==========
+
+* Added CITATION information
+
+
 scrm 1.3.3.9001
 ==========
 
-* Update scrm source to version 1.3.2 (#13).
+* Updated scrm source to version 1.3.2 (#13).
 
 
 scrm 1.3-3.9000
 ==========
 
-* Replace callback to warning with Rf_warning (#12). Thanks to J.J. Allaire for
+* Replaced callback to warning with Rf_warning (#12). Thanks to J.J. Allaire for
   the patch.
 
 
 scrm 1.3-3
 ==========
 
-* Add dependency to R >= 3.1.0.
-* Update scrm source to version 1.3.1.
-* Add title to vignettes.
+* Added dependency to R >= 3.1.0.
+* Updated scrm source to version 1.3.1.
+* Added title to vignettes.
 
 
 scrm 1.3-2
 ==========
 
-* Add missing import statement.
-* Fix access to unmapped memory.
+* Added missing import statement.
+* Fixed access to unmapped memory.
 
 
 scrm 1.3-1
