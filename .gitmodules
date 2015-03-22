@@ -1,0 +1,3 @@
+[submodule ".scrm"]
+	path = .scrm
+	url = https://github.com/scrm/scrm.git
