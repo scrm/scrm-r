@@ -13,7 +13,7 @@ test_that("RRG sample works", {
 test_that("RRG sampleUnitExpo works", {
   set.seed(100)
   for (i in 1:100) {
-    smpl <- test_RRG_sampleUnitExpo()
+    smpl <- test_RRG_sampleUnitExpo() #nolint
     expect_true(is.numeric(smpl) & is.finite(smpl))
     expect_that(smpl, is_more_than(0))
   }
