@@ -1,2 +1,2 @@
 library(testthat)
-test_check('scrm')
+test_check("scrm")
