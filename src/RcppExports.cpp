@@ -6,63 +6,47 @@
 using namespace Rcpp;
 
 // scrm
-List scrm(std::string args, std::string file = "");
+List scrm(std::string args, std::string file);
 RcppExport SEXP scrm_scrm(SEXP argsSEXP, SEXP fileSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< std::string >::type args(argsSEXP );
-        Rcpp::traits::input_parameter< std::string >::type file(fileSEXP );
-        List __result = scrm(args, file);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< std::string >::type args(argsSEXP);
+    Rcpp::traits::input_parameter< std::string >::type file(fileSEXP);
+    __result = Rcpp::wrap(scrm(args, file));
+    return __result;
 END_RCPP
 }
 // test_RRG_sample
 double test_RRG_sample();
 RcppExport SEXP scrm_test_RRG_sample() {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        double __result = test_RRG_sample();
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    __result = Rcpp::wrap(test_RRG_sample());
+    return __result;
 END_RCPP
 }
 // test_RRG_sampleUnitExpo
 double test_RRG_sampleUnitExpo();
 RcppExport SEXP scrm_test_RRG_sampleUnitExpo() {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        double __result = test_RRG_sampleUnitExpo();
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    __result = Rcpp::wrap(test_RRG_sampleUnitExpo());
+    return __result;
 END_RCPP
 }
 // test_RRG_sampleExpoExpoLimit
 double test_RRG_sampleExpoExpoLimit(double lambda, double b, double limit);
 RcppExport SEXP scrm_test_RRG_sampleExpoExpoLimit(SEXP lambdaSEXP, SEXP bSEXP, SEXP limitSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP );
-        Rcpp::traits::input_parameter< double >::type b(bSEXP );
-        Rcpp::traits::input_parameter< double >::type limit(limitSEXP );
-        double __result = test_RRG_sampleExpoExpoLimit(lambda, b, limit);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< double >::type limit(limitSEXP);
+    __result = Rcpp::wrap(test_RRG_sampleExpoExpoLimit(lambda, b, limit));
+    return __result;
 END_RCPP
 }
