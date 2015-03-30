@@ -3,6 +3,7 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^appveyor\.yml$
+^.lintr$
 ^.*.o$
 ^src\/scrm\/scrm\.cc$
 ^src\/scrm\/forest-debug\.cc$
