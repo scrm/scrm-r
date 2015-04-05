@@ -15,4 +15,4 @@ OBJECTS = $(OBJECTS.scrmr) $(OBJECTS.scrm) $(OBJECTS.random) \
           $(OBJECTS.sumstats)
 
 CXX_STD = CXX11
-  PKG_CPPFLAGS = -DVERSION="\"1.4.0\"" -DRBUILD
+  PKG_CPPFLAGS = -DVERSION="\"1.4.1\"" -DRBUILD
