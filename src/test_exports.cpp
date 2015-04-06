@@ -1,10 +1,12 @@
 #include <Rcpp.h>
 
 #include "r_random_generator.h"
+#include "scrm/random/fastfunc.h"
 
 using namespace Rcpp;
 
-RRandomGenerator rrg;
+FastFunc ff;
+RRandomGenerator rrg(&ff);
 
 // [[Rcpp::export]]
 double test_RRG_sample() {
