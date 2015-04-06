@@ -7,9 +7,11 @@
 #include "scrm/param.h"
 #include "scrm/forest.h"
 #include "scrm/model.h"
+#include "scrm/random/fastfunc.h"
 
 #include "summary_statistics.h"
 #include "r_random_generator.h"
+
 
 using namespace Rcpp;
 std::ofstream fs;
@@ -73,7 +75,8 @@ List scrm(std::string args, std::string file = "") {
     return List::create(_("version") = VERSION);
   }
 
-  RRandomGenerator rrg;
+  FastFunc ff;
+  RRandomGenerator rrg(&ff);
 
   /** Open a file for writing if 'file' is given */
   if (file.length() > 0) {
@@ -118,7 +121,6 @@ List scrm(std::string args, std::string file = "") {
 
   /** Clean up */
   if (write_file) fs.close();
-  rrg.clearFastFunc();
 
   return sum_stats;
 }
