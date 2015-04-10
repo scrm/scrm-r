@@ -1,5 +1,5 @@
 ---
-title: "Command Line Arguments"
+title: "scrm's Arguments"
 author: "Paul Staab"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
