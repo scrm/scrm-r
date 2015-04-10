@@ -5,7 +5,7 @@
 R Package scrm
 =======================
 
-_scrm_ is a fast and accurate coalescence simulator for the evolution 
+_scrm_ is a coalescence simulator for the evolution 
 of biological sequences. It is available as a command line program at
 [scrm.github.io](https://scrm.github.io).
 
@@ -53,11 +53,3 @@ Please report problems with _scrm_ using its
 Please include the version you are using and the exact command that 
 causes the problem including seed (if applicable) in the report.
 Also, feel free to suggest features you would like to see in _scrm_ there.
-
-
-Versioning
-======================
-The R package has a version of format `x.y-z`. `x.y` is the version 
-of _scrm_ included in the package, and `z` is the number of CRAN releases 
-for this _scrm_ version, starting at `1` (`0` is used for development only).
-
