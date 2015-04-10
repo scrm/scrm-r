@@ -35,7 +35,7 @@ where _nhap_ is the total number of haplotypes (in all populations and at all ti
 
 ### Recombination
 
-* `-r <R> <L>`: Set the recombination rate to _R = 4*N0*r_ and the length of all loci to L base pairs. _r_ is the recombination rate per locus.
+* `-r <R> <L>`: Set the recombination rate to _R = 4*N0*r_ and the length of all loci to L base pairs. _r_ is expected number of recombinations on the locus per generation.
 * `-l <l>`: Use approximation rather than simulating the exact ARG. Within a sliding window of length _l_ base pairs all linkage information is considered when building the genealogy. To positions outside of this window, some linkage  is ignored. Setting _l=0_ produces the SMC' and _l=-1_ or _l>L_ deactivates the approximation. 
 
 ### Population structure & migration
@@ -47,6 +47,11 @@ In all commands, migrations rates _M = 4*N0*m_, where _m_ is the fraction of a p
 * `-ma <M11> <M21> ... <M21> ...`: Set the migration matrix (Dimension is _npop x npop_). Diagonals elements are ignored but required.  
 
 ### Population size changes
+For exponential growth/decline of a population, the parameter _a_ changes the size of a population
+according to the formula _N(s) = N(0)*exp(-a*s)_, where _N(0)_ is the population's size at the time of the command (e.g. _0_ for `-g <a>` and `-G <a>` and _t_ for `-eg <t> <a>` and `-eG <t> <a>`) and _N(s)_ is the size of the population _s_ time units in the past.
+Looking forwards in time, a positive _a_ leads to population growth, while a negative one generates a
+decline in population sizes.
+
 * `-n <i> <n>`: Set the present day size of population _i_ to _n*N0_.
 * `-G <a>`: Set the exponential growth rate of all populations to _a_.
 * `-g <i> <a>`: Set the exponential growth rate of population _i_ to _a_.
@@ -62,7 +67,14 @@ In all commands, migrations rates _M = 4*N0*m_, where _m_ is the fraction of a p
 
 ### Other options
 
-* `-seed <SEED> [<SEED2> <SEED3>]`: Specifies a seed for the simulation. You can input up to three non-negative numbers. If no seed is given, scrm generates one using entropy provided by the operating system. To reproduce a previous simulation, use the single number in the second line of the output.
+* `-seed <SEED> [<SEED2> <SEED3>]`: Specifies a seed for the simulation. 
+  You can input up to three non-negative numbers. If no seed is given, 
+  scrm generates one using entropy provided by the operating system.
+  To reproduce a previous simulation, use the single number in the second 
+  line of the output.
+* `-print-model, --print-model`: Prints information about the model defined 
+   by the command line arguments, including calculated population sizes. 
+   Can be useful for debugging or verifying the model [since v1.5.0]. 
 * `-p <digits>`: Sets the number of significant digits used in the output [since v1.4.0].
 * `-h`, `--help`: Prints a help text.
 * `-v`, `--version`: Prints version information.
@@ -87,9 +99,11 @@ The command this section all have a time _t_ as first parameter. Changes made by
 
 ### Population Splits & Merges
 
-* `-es <t> <i> <p>`: Population admixture. Replaces a fraction of _1-p_ of population _i_ with haplotypes from a population _npop + 1_. Technically (and looking backwards in time), a new population _n+1_ with size _N0_ is created at time _t_. Migration (to & from) and growth rates for this population are initially 0. Each lines in population _i_ is moved to the new population with probability _1-p_. Please sort multiple `-es` arguments by their time to avoid confusion about the numbering of populations. Please give the arguments that affect the whole population (`-M`, `-N`, `-G` & `-ma`) before giving the first `-es`. Also, their timed equivalent's (`-eM`, `-eN`, `-eG`, `-eI` & `-ema`) position on the command line events must also be sorted by time, at least relative to the `-es` argument. 
+* `-es <t> <i> <p>`: Population admixture. Replaces a fraction _1-p_ of population _i_ with haplotypes from a population _npop + 1_. Technically (and looking backwards in time), a new population _n+1_ with size _N0_ is created at time _t_. Migration (to & from) and growth rates for this population are initially 0. Each lines in population _i_ is moved to the new population with probability _1-p_. Please sort multiple `-es` arguments by their time to avoid confusion about the numbering of populations. Please give the arguments that affect the whole population (`-M`, `-N`, `-G` & `-ma`) before giving the first `-es`. Also, their timed equivalent's (`-eM`, `-eN`, `-eG`, `-eI` & `-ema`) position on the command line events must also be sorted by time, at least relative to the `-es` argument. 
 `scrm` throws an error if any of these conditions is not met. In doubt, just sort all command line arguments by their time.
-* `-ej <t> <i> <j>`: Adds a specialization event in population _i_ that creates population _j_ (forwards in time). Technically (and looking backwards in time), it merges population _j_ into population _i_ at time _t_. Migration rates into population _j_ are set to 0 for the time further back into the past.
+* `-eps <t> <i> <j> <p>`: Partial admixture. Similar to `-es` but replaces a fraction `1-p` of population _i_ with haploids from population _j_ at time _t_. Different to `-es`, population _j_ is a normal population that continues to exist at times more recent than _t_. 
+Viewed backwards in time, this moves a fraction _1-p_ of the linages in population _i_ to population _j_. This does not change the number of populations, population sizes, growth or migration rates in any way [since v1.5.0].
+* `-ej <t> <j> <i>`: Adds a specialization event in population _i_ that creates population _j_ (forwards in time). Technically (and looking backwards in time), it moves all lines from population _j_ into population _i_ at time _t_. Migration rates into population _j_ are set to 0 for the time further back into the past.
  
 ## Sequence specific parameters
 The following commands change the model parameters from at a sequence position _s_.

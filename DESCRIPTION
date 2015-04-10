@@ -1,8 +1,8 @@
 Package: scrm
 Type: Package
 Title: Simulating the Evolution of Biological Sequences
-Version: 1.4.1-1
-Date: 2015-04-05
+Version: 1.5.0-1
+Date: 2015-04-10
 Authors@R: c( person('Paul', 'Staab', , 'develop@paulstaab.de', role=c('aut',
     'cre', 'cph')), person('Zhu', 'Sha', role=c('aut', 'cph')), person('Dirk',
     'Metzler', role=c('aut', 'cph', 'ths')), person('Gerton', 'Lunter',

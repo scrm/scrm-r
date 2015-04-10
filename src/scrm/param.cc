@@ -60,7 +60,7 @@ void Param::parse(Model &model) {
   model = Model();
 
   size_t sample_size = 0;
-  double par_bool = 0.0;
+  double par_dbl = 0.0;
   double time = 0.0;
   size_t source_pop, sink_pop;
 
@@ -129,9 +129,9 @@ void Param::parse(Model &model) {
     // Recombination 
     // ------------------------------------------------------------------
     else if (argv_i == "-r") {
-      par_bool = readNextInput<double>();
+      par_dbl = readNextInput<double>();
       model.setLocusLength(readNextInt());
-      model.setRecombinationRate(par_bool, true, true, 0.0);
+      model.setRecombinationRate(par_dbl, true, true, 0.0);
     }
 
     else if (argv_i == "-sr") {
@@ -279,9 +279,27 @@ void Param::parse(Model &model) {
       source_pop = readNextInt() - 1;
       sink_pop = model.population_number();
       double fraction = readNextInput<double>();
+      if (fraction < 0.0) 
+        throw std::invalid_argument("Probability in `-es` argument is negative."); 
+      if (fraction > 1.0)
+        throw std::invalid_argument("Probability in `-es` argument greater than one."); 
 
       model.addPopulation();
-      model.addSingleMigrationEvent(time, source_pop, sink_pop, fraction, true); 
+      model.addSingleMigrationEvent(time, source_pop, sink_pop, 1-fraction, true); 
+    }
+
+
+    else if (argv_i == "-eps") {
+      time = readNextInput<double>();
+      source_pop = readNextInt() - 1;
+      sink_pop = readNextInt() - 1;
+      double fraction = readNextInput<double>();
+      if (fraction < 0.0) 
+        throw std::invalid_argument("Probability in `-eps` argument is negative."); 
+      if (fraction > 1.0)
+        throw std::invalid_argument("Probability in `-eps` argument greater than one."); 
+
+      model.addSingleMigrationEvent(time, source_pop, sink_pop, 1-fraction, true); 
     }
 
 
@@ -363,7 +381,8 @@ void Param::parse(Model &model) {
     // ------------------------------------------------------------------
     // Seeds
     // ------------------------------------------------------------------
-    else if (argv_i == "-seed" || argv_i == "--seed") {
+    else if (argv_i == "-seed" || argv_i == "--seed" ||
+             argv_i == "-seeds" || argv_i == "--seeds") {
       std::vector<size_t> seeds(3, 0);
       // Always require one seed
       seeds.at(0) = readNextInt();
@@ -396,6 +415,11 @@ void Param::parse(Model &model) {
       this->set_version(true);
       return;
     }
+
+    else if (argv_i == "-print-model" || argv_i == "--print-model") {
+      this->set_print_model(true);
+    } 
+
 
     // ------------------------------------------------------------------
     // Unsupported ms arguments
@@ -479,6 +503,8 @@ void Param::printHelp(std::ostream& out) {
   out << "  -es <t> <i> <p>  Population admixture. Replaces a fraction of 1-p of" << std::endl
       << "                   population i with individuals a from population npop + 1" << std::endl
       << "                   which is ignored afterwards (forward in time). " << std::endl;
+  out << "  -eps <t> <i> <j> <p>  Partial Population admixture. Replaces a fraction of 1-p of" << std::endl
+      << "                   population i with individuals a from population j." << std::endl;
   out << "  -ej <t> <i> <j>  Speciation event at time t. Creates population j" << std::endl
       << "                   from individuals of population i." << std::endl;
 
@@ -507,12 +533,14 @@ void Param::printHelp(std::ostream& out) {
   out << "  -init <FILE>     Read genealogies at the beginning of the sequence." << std::endl;
 
   out << std::endl << "Other:" << std::endl;
-  out << "  -seed <SEED> [<SEED2> <SEED3>]   The random seed to use. Takes up three" << std::endl 
+  out << "  -seed <SEED> [<SEED2> <SEED3>]   The random seed to use. Takes up to three" << std::endl 
       << "                   integer numbers." << std::endl;
   out << "  -p <digits>      Specify the number of significant digits used in the output." << std::endl
       << "                   Defaults to 6." << std::endl;
   out << "  -v, --version    Prints the version of scrm." << std::endl;
   out << "  -h, --help       Prints this text." << std::endl;
+  out << "  -print-model,    " << std::endl
+      << "  --print-model    Prints information about the demographic model." << std::endl;
 
   out << std::endl << "Examples" << std::endl;
   out << "--------------------------------------------------------" << std::endl;
