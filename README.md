@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/scrm/scrm-r.svg?branch=master)](https://travis-ci.org/scrm/scrm-r)
-[![Coverage Status](https://coveralls.io/repos/scrm/scrm-r/badge.svg?branch=master)](https://coveralls.io/r/scrm/scrm-r)
 [![DOI](https://zenodo.org/badge/6744/scrm/scrm-r.png)](http://dx.doi.org/10.5281/zenodo.12351)
 
 R Package scrm
