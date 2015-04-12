@@ -3,19 +3,16 @@ warnings_are_errors: true
 env: _R_CHECK_CRAN_INCOMING_=FALSE
 
 r_binary_packages:
-  - igraph 
-  - stringdist 
-  - shiny
+  - igraph
+  - stringdist
 
 r_github_packages:
-  - jimhester/covr
   - jimhester/lintr
 
 after_success:
-  - Rscript -e 'library(covr); coveralls()'
   - Rscript -e 'lintr::lint_package()'
 
 notifications:
   email:
-    on_success: always
+    on_success: change
     on_failure: always
