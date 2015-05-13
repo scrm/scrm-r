@@ -1,4 +1,7 @@
-[![Build Status](https://travis-ci.org/scrm/scrm-r.svg?branch=master)](https://travis-ci.org/scrm/scrm-r)
+[![Linux Build Status](https://travis-ci.org/scrm/scrm-r.svg?branch=master)](https://travis-ci.org/scrm/scrm-r)
+[![Windows Build Status](https://ci.appveyor.com/api/projects/status/octt2w69byiq198s/branch/master?svg=true)](https://ci.appveyor.com/project/paulstaab/scrm-r/branch/master)
+[![CRAN Status](http://www.r-pkg.org/badges/version/scrm)](http://cran.r-project.org/web/packages/scrm)
+[![CRAN RStudio Mirror Downloads](http://cranlogs.r-pkg.org/badges/scrm)](http://cran.r-project.org/web/packages/scrm/index.html)
 [![DOI](https://zenodo.org/badge/6744/scrm/scrm-r.png)](http://dx.doi.org/10.5281/zenodo.12351)
 
 R Package scrm
