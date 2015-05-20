@@ -1,5 +1,5 @@
 ---
-title: "scrm's Arguments"
+title: "Command Line Arguments"
 author: "Paul Staab"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -107,6 +107,9 @@ Viewed backwards in time, this moves a fraction _1-p_ of the linages in populati
  
 ## Sequence specific parameters
 The following commands change the model parameters from at a sequence position _s_.
+You should still set the initial rate with `-r` or `-t`, respectively, and then use
+the commands prefixed with `s` for all changes. Note that `-r` also takes the total
+length of the sequence as second argument, while `-sr` just has the rate as argument.
 
 * `-sr <s> <R>`: Set the recombination rate to _R_ starting at position _s_.
 * `-st <s> <$\theta$>`: Set the mutation rate to $\theta$ starting at position _s_. 
