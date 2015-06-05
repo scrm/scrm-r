@@ -36,7 +36,7 @@ where _nhap_ is the total number of haplotypes (in all populations and at all ti
 ### Recombination
 
 * `-r <R> <L>`: Set the recombination rate to _R = 4*N0*r_ and the length of all loci to L base pairs. _r_ is expected number of recombinations on the locus per generation.
-* `-l <l>`: Use approximation rather than simulating the exact ARG. Within a sliding window of length _l_ base pairs all linkage information is considered when building the genealogy. To positions outside of this window, some linkage  is ignored. Setting _l=0_ produces the SMC' and _l=-1_ or _l>L_ deactivates the approximation. 
+* `-l <l>`: Use approximation rather than simulating the exact ARG. Within a sliding window of length _l_ base pairs all linkage information is considered when building the genealogy. To positions outside of this window, some linkage  is ignored. Setting _l=0_ produces the SMC' and _l=-1_ deactivates the approximation. Since v1.6.0, it's also possible to specify the window's length in number of recombinations. To do so, use `-l <x>r`, where x is the number of recombinations (e.g. `-l 100r` for a window spanning 100 recombinations). Also starting with version 1.6.0 **approximation is turned on by default** using a conservative window length of 500 recombinations. For most applications, it should be fine to reduce this value to 100 - 250 recombinations if runtime is a critical factor.
 
 ### Population structure & migration
 In all commands, migrations rates _M = 4*N0*m_, where _m_ is the fraction of a population that is replaced with migrants from other populations each generation (looking forwards in time).
