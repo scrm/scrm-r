@@ -65,9 +65,8 @@ bool write_file;
 List scrm(std::string args, std::string file = "") {
 
   /** Parse args and generate the model */
-  Param param("scrm " + args);
-  Model model;
-  param.parse(model);
+  Param param(args);
+  Model model = param.parse();
 
   // Print help or version information if user asked for it
   if (param.help()) stop("Please use '?scrm' for help");
