@@ -1,10 +1,10 @@
 /*
  * scrm is an implementation of the Sequential-Coalescent-with-Recombination Model.
- * 
+ *
  * Copyright (C) 2013, 2014 Paul R. Staab, Sha (Joe) Zhu, Dirk Metzler and Gerton Lunter
- * 
+ *
  * This file is part of scrm.
- * 
+ *
  * scrm is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -14,7 +14,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -33,37 +33,44 @@
 class OrientedForest : public SummaryStatistic
 {
  public:
-   OrientedForest(const size_t sample_size) {
+  OrientedForest(const size_t sample_size) {
     parents_ = std::vector<int>(2*sample_size-1, 0);
     heights_ = std::vector<double>(2*sample_size-1, 0.0);
-   }
-   ~OrientedForest() {}
+    output_buffer_.exceptions(std::ios::failbit);
+    output_buffer_.precision(6);
+  }
+  OrientedForest(const size_t sample_size, const size_t precision) {
+    parents_ = std::vector<int>(2*sample_size-1, 0);
+    heights_ = std::vector<double>(2*sample_size-1, 0.0);
+    output_buffer_.exceptions(std::ios::failbit);
+    output_buffer_.precision(precision);
+  }
 
-   //Virtual methods
-   void calculate(const Forest &forest);
-   void printLocusOutput(std::ostream &output) const;
-   void clear() {
-     output_buffer_.str("");
-     output_buffer_.clear();
-   }
+  //Virtual methods
+  void calculate(const Forest &forest);
+  void printLocusOutput(std::ostream &output) const;
+  void clear() {
+    output_buffer_.str("");
+    output_buffer_.clear();
+  }
 
-   OrientedForest* clone() const {
-     return new OrientedForest(this->parents_.size());
-   }
+  OrientedForest* clone() const {
+    return new OrientedForest(this->parents_.size(), this->output_buffer_.precision());
+  }
 
-   std::string getTrees() const { return output_buffer_.str(); }
+  std::string getTrees() const { return output_buffer_.str(); }
 
 #ifdef UNITTEST
-   friend class TestSummaryStatistics;
+  friend class TestSummaryStatistics;
 #endif
 
  private:
-   OrientedForest() {}
-   void generateTreeData(Node const* node, size_t &pos, int parent_pos);
+  OrientedForest() {}
+  void generateTreeData(Node const* node, size_t &pos, int parent_pos);
 
-   std::vector<int> parents_;
-   std::vector<double> heights_;
-   std::ostringstream output_buffer_;
+  std::vector<int> parents_;
+  std::vector<double> heights_;
+  std::stringstream output_buffer_;
 };
 
 #endif
