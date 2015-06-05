@@ -1,10 +1,10 @@
 /*
  * scrm is an implementation of the Sequential-Coalescent-with-Recombination Model.
- * 
+ *
  * Copyright (C) 2013, 2014 Paul R. Staab, Sha (Joe) Zhu, Dirk Metzler and Gerton Lunter
- * 
+ *
  * This file is part of scrm.
- * 
+ *
  * scrm is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -14,7 +14,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -34,7 +34,7 @@
 
 /**
  * @brief Save buffered trees along with the recombination number at which
- * they where created. 
+ * they where created.
  */
 struct NewickBuffer {
   size_t recombination;  ///< The recombination at which the subtree was created.
@@ -44,10 +44,16 @@ struct NewickBuffer {
 class NewickTree : public SummaryStatistic
 {
  public:
-  NewickTree() : NewickTree(6, true) { }
-  NewickTree(size_t precision) : NewickTree(precision, true) { }
-  NewickTree(size_t precision, bool has_recombination) { 
-    precision_ = precision; 
+  NewickTree() {
+    precision_ = 6;
+    has_rec_ = true;
+  }
+  NewickTree(size_t precision) {
+    precision_ = precision;
+    has_rec_ = true;
+  }
+  NewickTree(size_t precision, bool has_recombination) {
+    precision_ = precision;
     has_rec_ = has_recombination;
   }
 
@@ -74,7 +80,7 @@ class NewickTree : public SummaryStatistic
   bool has_rec_;
 
   /**
-   * A map to buffer already created subtrees indexed by their 
+   * A map to buffer already created subtrees indexed by their
    * root.
    */
   std::map<Node const*, NewickBuffer> buffer_;
