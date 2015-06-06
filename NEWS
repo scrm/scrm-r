@@ -1,4 +1,10 @@
-scrm 1.5.1-1
+scrm 1.6.0-2
+============
+
+* Replaced 'scrm' with 'it' in the package description.
+
+
+scrm 1.6.0-1
 ============
 
 * Updated the sources of scrm to version 1.6.0.
