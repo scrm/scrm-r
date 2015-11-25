@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker run --rm -ti -v $(pwd):/mnt rocker/r-devel-ubsan-clang \
-  check.r --setwd /mnt --install-deps $1
+docker run --rm -ti -v $(pwd):/mnt rocker/r-devel-san \
+  Rscriptdevel -e "devtools::test('/mnt')"
