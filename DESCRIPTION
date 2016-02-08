@@ -2,7 +2,6 @@ Package: scrm
 Type: Package
 Title: Simulating the Evolution of Biological Sequences
 Version: 1.6.0-2
-Date: 2015-06-06
 Authors@R: c(
     person('Paul', 'Staab', , 'develop@paulstaab.de', role=c('aut', 'cre', 'cph')),
     person('Zhu', 'Sha', role=c('aut', 'cph')),
@@ -17,15 +16,17 @@ Description: A coalescent simulator that allows the rapid simulation of
     produced by Next-Generation Sequencing technologies for up to several thousand
     sequences.
 URL: https://github.com/scrm/scrm-r
+BugReports: https://github.com/scrm/scrm-r/issues
 License: GPL (>= 3)
 Depends:
     R (>= 3.1.0)
 Imports:
     Rcpp (>= 0.11.2)
 Suggests:
-    testthat (>= 0.9.0),
+    ape,
     knitr,
-    ape
+    rmarkdown,
+    testthat (>= 0.9.0)
 SystemRequirements: C++11
 VignetteBuilder: knitr
 LinkingTo: Rcpp
