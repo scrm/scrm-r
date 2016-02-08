@@ -34,7 +34,7 @@ test_that("writing into a file works", {
   file <- tempfile("scrm_")
   scrm("10 1 -r 10 100 -t 5", file = file)
   expect_true(file.exists(file))
-  output <- scan(file, what="character", sep="\n", quiet = TRUE)
+  output <- scan(file, what = "character", sep = "\n", quiet = TRUE)
   expect_equal(output[1], "scrm 10 1 -r 10 100 -t 5")
   expect_equal(output[2], "//")
   expect_true(output[3] != "")
@@ -46,7 +46,7 @@ test_that("writing into a file works", {
   file <- "scrm_test_file"
   scrm("10 1 -t 5", file = file)
   expect_true(file.exists(file))
-  expect_true(file.exists(paste(tempdir(), file, sep="/")))
+  expect_true(file.exists(paste(tempdir(), file, sep = "/")))
   unlink(file)
 
   # Test with "//" instead of "/"
@@ -55,13 +55,13 @@ test_that("writing into a file works", {
   dir.create("scrm_test_dir")
   scrm("10 1 -t 5", file = file)
   expect_true(file.exists(file))
-  expect_true(file.exists(paste(tempdir(), file, sep="/")))
+  expect_true(file.exists(paste(tempdir(), file, sep = "/")))
 
   # Test with "\" instead of "/"
   file <- "scrm_test_dir\\scrm_test_file2"
   scrm("10 1 -t 5", file = file)
   expect_true(file.exists(file))
-  expect_true(file.exists(paste(tempdir(), file, sep="/")))
+  expect_true(file.exists(paste(tempdir(), file, sep = "/")))
   unlink("scrm_test_dir", recursive = TRUE)
   setwd(work_dir)
 })
