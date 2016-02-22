@@ -74,8 +74,8 @@ List scrm(std::string args, std::string file = "") {
     return List::create(_("version") = VERSION);
   }
 
-  FastFunc ff;
-  RRandomGenerator rrg(&ff);
+  std::shared_ptr<FastFunc> ff = std::make_shared<FastFunc>();
+  RRandomGenerator rrg(ff);
 
   /** Open a file for writing if 'file' is given */
   if (file.length() > 0) {

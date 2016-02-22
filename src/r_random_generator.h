@@ -24,13 +24,14 @@
 #define scrmr_r_random_generator
 
 #include <Rcpp.h>
+#include <memory>
 #include "scrm/random/random_generator.h"
 
 using namespace Rcpp;
 
 class RRandomGenerator : public RandomGenerator {
  public:
-  RRandomGenerator(FastFunc* ff):RandomGenerator(ff) {
+  RRandomGenerator(std::shared_ptr<FastFunc> ff):RandomGenerator(ff) {
     this->initializeUnitExponential();
   };
   virtual ~RRandomGenerator() {};
