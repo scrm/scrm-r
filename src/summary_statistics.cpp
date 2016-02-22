@@ -59,14 +59,10 @@ void addLocusSumStats(const Forest &forest, size_t locus, List &sum_stats) {
 
     else if (typeid(*sum_stat) == typeid(TMRCA)) {
       TMRCA* tmrca = dynamic_cast<TMRCA*>(sum_stat);
-
-      // These two are only references.
-      DataFrame tmrca_data = DataFrame::create(
+      as<List>(sum_stats[i])[locus] = DataFrame::create(
         _["tmrca"] = tmrca->tmrca(),
         _["tree_length"] = tmrca->tree_length()
       );
-
-      as<List>(sum_stats[i])[locus] = tmrca_data;
     }
 
     else if (typeid(*sum_stat) == typeid(NewickTree)) {
@@ -80,7 +76,7 @@ void addLocusSumStats(const Forest &forest, size_t locus, List &sum_stats) {
 
     else if (typeid(*sum_stat) == typeid(OrientedForest)) {
       OrientedForest* of = dynamic_cast<OrientedForest*>(sum_stat);
-      as<List>(sum_stats[i])[locus] = of->getTrees();
+      //as<List>(sum_stats[i])[locus] = of->getTrees();
     }
 
     else if (typeid(*sum_stat) == typeid(FrequencySpectrum)) {
