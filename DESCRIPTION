@@ -30,3 +30,4 @@ Suggests:
 SystemRequirements: C++11
 VignetteBuilder: knitr
 LinkingTo: Rcpp
+RoxygenNote: 5.0.1

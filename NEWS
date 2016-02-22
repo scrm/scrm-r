@@ -1,3 +1,9 @@
+scrm 1.7.0-0
+============
+
+* Return the TMRCA summary statistic as a data.frame instead of a matrix.
+
+
 scrm 1.6.0-2
 ============
 

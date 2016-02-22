@@ -35,7 +35,7 @@ test_that("TMRCA import works", {
   expect_equal(length(sum_stats$tmrca), 3)
 
   for (tmrca in sum_stats$tmrca) {
-    expect_is(tmrca, "matrix")
+    expect_is(tmrca, "data.frame")
     expect_equal(ncol(tmrca), 2)
     expect_that(nrow(tmrca), is_more_than(0))
     expect_true(all(tmrca > 0))
