@@ -44,14 +44,9 @@ struct NewickBuffer {
 class NewickTree : public SummaryStatistic
 {
  public:
-  NewickTree() : NewickTree(6, true) { }
-  NewickTree(size_t precision) : NewickTree(precision, true) { }
-  NewickTree(size_t precision, bool has_recombination) { 
-    precision_ = precision; 
-    has_rec_ = has_recombination;
-  }
-
-  ~NewickTree() {}
+  NewickTree() : precision_(6), has_rec_(true) { }
+  NewickTree(size_t precision) : precision_(precision), has_rec_(true) { }
+  NewickTree(size_t precision, bool has_recombination) : precision_(precision), has_rec_(has_recombination) { }
 
   //Virtual methods
   void calculate(const Forest &forest);
