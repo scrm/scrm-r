@@ -24,7 +24,6 @@
 
 Model::Model() {
   default_pop_size = 10000;
-  default_loci_length = 100000;
   default_growth_rate = 0.0;
   default_mig_rate = 0.0;
   scaling_factor_ = 1.0 / (4 * default_pop_size);
@@ -32,15 +31,13 @@ Model::Model() {
   has_migration_ = false;
   has_recombination_ = false;
 
+  this->set_loci_number(1);
+  this->setLocusLength(1);
   this->addChangeTime(0.0);
   this->addChangePosition(0.0);
 
   this->set_population_number(1);
 
-  this->set_loci_number(1);
-  this->loci_length_ = this->default_loci_length;
-
-  this->setLocusLength(default_loci_length);
   this->setMutationRate(0.0);
   this->setRecombinationRate(0.0);
 
@@ -54,37 +51,9 @@ Model::Model() {
 }
 
 
-Model::Model(size_t sample_size) {
-  default_pop_size = 10000;
-  default_loci_length = 100000;
-  default_growth_rate = 0.0;
-  default_mig_rate = 0.0;
-  scaling_factor_ = 1.0 / (4 * default_pop_size);
-
-  has_migration_ = false;
-  has_recombination_ = false;
-
-  this->addChangeTime(0.0);
-  this->addChangePosition(0.0);
-
-  this->set_population_number(1);
-
-  this->set_loci_number(1);
-  this->loci_length_ = this->default_loci_length;
-
-  this->setLocusLength(default_loci_length);
-  this->setMutationRate(0.0);
-  this->setRecombinationRate(0.0);
-
-  this->window_length_seq_ = 0;
-  this->set_window_length_rec(500);
-
-  this->setSequenceScaling(ms);
-
-  this->resetTime();
-  this->resetSequencePosition();
-
+Model::Model(size_t sample_size) : Model() {
   this->addSampleSizes(0.0, std::vector<size_t>(1, sample_size));
+  this->setLocusLength(1000);
   this->resetTime();
 }
 
@@ -147,20 +116,22 @@ size_t Model::addChangeTime(double time, const bool &scaled) {
 
 
 /**
- * Function to add a new change time to the model.
+ * Adds a new change position to the model.
  *
- * It preserves the relation between the times and the *param*_list_ containers.
- * If the same time is added multiple times, it is just added once to the model,
- * but this should not make a difference when using this function.
+ * Change position are sequence positions where mutation or recombination rates
+ * change. This creates a new position, but does not add the new rates. 
  *
- * @param time The time that is added
- * @param scaled set to TRUE if the time is in units of 4N0 generations, and
- * FALSE if it is in units of generations.
+ * @param position The sequence position add which a change is added
  *
- * @returns The position the time has now in the vector
+ * @returns The index of the new rates in the recombination_rates_ and
+ * mutation_rates vectors.
  */
 size_t Model::addChangePosition(const double position) {
-  size_t idx = 0;
+  if (position < 0 || position > loci_length()) {
+    std::stringstream ss;
+    ss << "Rate change position " << position << " is outside of the simulated sequence.";
+    throw std::invalid_argument(ss.str());
+  }
 
   if ( change_position_.size() == 0 ) {
     change_position_ = std::vector<double>(1, position);
@@ -169,6 +140,7 @@ size_t Model::addChangePosition(const double position) {
     return 0;
   }
 
+  size_t idx = 0;
   std::vector<double>::iterator ti;
   for (ti = change_position_.begin(); ti != change_position_.end(); ++ti) {
     if ( *ti == position ) return idx;
@@ -514,7 +486,7 @@ std::ostream& operator<<(std::ostream& os, Model& model) {
     for (size_t i = 0; i < n_pops; ++i) {
       for (size_t j = 0; j < n_pops; ++j) {
         if (model.single_mig_pop(i, j) != 0) {
-          os << " " << model.single_mig_pop(i, j) * 100 << "\% of pop "
+          os << " " << model.single_mig_pop(i, j) * 100 << "% of pop "
              << i + 1 << " move to pop " << j + 1 << std::endl;
         }
       }
@@ -737,3 +709,4 @@ void Model::setMutationRate(double rate, const bool &per_locus, const bool &scal
     mutation_rates_.at(idx) = rate;
   }
 }
+
