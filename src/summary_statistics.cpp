@@ -41,7 +41,11 @@ List initSumStats(const Forest &forest) {
 }
 
 
-void addLocusSumStats(const Forest &forest, size_t locus, List &sum_stats) {
+void addLocusSumStats(const Forest &forest,
+                      size_t locus,
+                      List &sum_stats,
+                      CharacterVector newick_trees) {
+
   for (size_t i = 0; i < forest.model().countSummaryStatistics(); ++i) {
     SummaryStatistic* sum_stat = forest.model().getSummaryStatistic(i);
 
@@ -66,12 +70,7 @@ void addLocusSumStats(const Forest &forest, size_t locus, List &sum_stats) {
     }
 
     else if (typeid(*sum_stat) == typeid(NewickTree)) {
-      NewickTree* nt = dynamic_cast<NewickTree*>(sum_stat);
-      CharacterVector stat(1);
-      std::stringstream ss;
-      nt->printLocusOutput(ss);
-      stat[0] = ss.str();
-      as<List>(sum_stats[i])[locus] = stat;
+      as<List>(sum_stats[i])[locus] = newick_trees;
     }
 
     else if (typeid(*sum_stat) == typeid(OrientedForest)) {
@@ -87,4 +86,22 @@ void addLocusSumStats(const Forest &forest, size_t locus, List &sum_stats) {
       }
     }
   }
+}
+
+NewickTree* getNewickTree(const Forest &forest) {
+  for (size_t i = 0; i < forest.model().countSummaryStatistics(); ++i) {
+    SummaryStatistic* sum_stat = forest.model().getSummaryStatistic(i);
+    if (typeid(*sum_stat) == typeid(NewickTree)) {
+      return dynamic_cast<NewickTree*>(sum_stat);
+    }
+  }
+  return NULL;
+};
+
+std::string readSegmentTree(SummaryStatistic* sum_stat) {
+  std::stringstream ss;
+  sum_stat->printSegmentOutput(ss);
+  std::string tree = ss.str();
+  //tree.erase(tree.end()-2);
+  return tree;
 }

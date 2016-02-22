@@ -2,6 +2,8 @@ scrm 1.7.0-0
 ============
 
 * Return the TMRCA summary statistic as a data.frame instead of a matrix.
+* Return Newick trees as a character vector where each tree is an entry instead
+  of all trees being concatenated.
 
 
 scrm 1.6.0-2

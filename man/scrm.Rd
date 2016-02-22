@@ -43,6 +43,7 @@ str(sum_stats)
 # 10 Chromosomes of 1Mb length are sampled from two populations with
 # migration inbetween.
 scrm('10 3 -r 400 1000000 -l 100000 -I 2 4 6 0.5 -t 300 -oSFS')$sfs
+
 }
 \seealso{
 \itemize{
