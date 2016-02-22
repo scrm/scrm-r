@@ -54,18 +54,6 @@ test_that("Newick Tree import works", {
   }
 })
 
-test_that("Newick Tree import works", {
-  sum_stats <- scrm("4 2 -r 1 100 -T")
-  expect_is(sum_stats, "list")
-  expect_is(sum_stats$trees, "list")
-  expect_equal(length(sum_stats$trees), 2)
-
-  for (tree in sum_stats$trees) {
-    expect_is(tree, "character")
-    expect_that(nchar(tree), is_more_than(3))
-  }
-})
-
 test_that("Oriented Forest import works", {
   sum_stats <- scrm("4 4 -r 1 100 -O")
   expect_is(sum_stats, "list")
