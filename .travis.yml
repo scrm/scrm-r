@@ -1,6 +1,10 @@
 language: r
 cache: packages
-warnings_are_errors: true
+
+r:
+  - oldrel
+  - release
+  - devel
 
 r_github_packages:
   - jimhester/lintr 
