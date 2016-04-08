@@ -288,6 +288,7 @@ void Forest::buildInitialTree() {
   assert(this->segment_count() == 0);
   assert(this->rec_bases_.size() == 1);
   assert(this->model().getCurrentSequencePosition() == 0.0);
+  assert(this->contemporaries()->empty());
   this->set_next_base(0.0);
   ++current_rec_;
 
@@ -313,7 +314,7 @@ void Forest::buildInitialTree() {
     if (new_leaf->height() == 0.0) last_added_node = new_leaf;
     dout << "* starting coalescences" << std::endl;
 
-    //Coalesces the separate tree into the main tree
+    // Coalesces the separate tree into the main tree
     this->sampleCoalescences(new_leaf);
     dout << "* * Tree:" << std::endl;
 
@@ -474,20 +475,21 @@ void Forest::sampleCoalescences(Node *start_node) {
   assert( start_node->is_root() );
   // We can have one or active local nodes: If the coalescing node passes the
   // local root, it also starts a coalescence.
-  set_active_node(0, start_node);
-  set_active_node(1, this->local_root());
+  if (start_node->height() > this->local_root()->height()) {
+    set_active_node(0, this->local_root());
+    set_active_node(1, start_node);
+  } else {
+    set_active_node(0, start_node);
+    set_active_node(1, this->local_root());
+  }
+  assert ( active_node(0)->height() <= active_node(1)->height() );
 
   // Initialize Temporary Variables
-  tmp_event_ = Event(start_node->height());
+  tmp_event_ = Event(active_node(0)->height());
   coalescence_finished_ = false;
 
-  // This assertion needs an exception for building the initial tree
-  assert ( current_rec() == 1 ||
-           active_node(1)->in_sample() ||
-           start_node->height() <= active_node(1)->height() );
-
   // Only prune every second round
-  for (TimeIntervalIterator ti(this, start_node); ti.good(); ++ti) {
+  for (TimeIntervalIterator ti(this, active_node(0)); ti.good(); ++ti) {
 
     dout << "* * Time interval: " << (*ti).start_height() << " - "
          << (*ti).end_height() << " (Last event at " << tmp_event_.time() << ")" << std::endl;
@@ -1259,6 +1261,7 @@ void Forest::clear() {
 
   // Clear nodes
   nodes()->clear();
+  contemporaries()->clear(true);
 
   // Reset Position & Segment Counts
   this->rec_bases_.clear();

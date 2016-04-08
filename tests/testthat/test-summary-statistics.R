@@ -48,9 +48,11 @@ test_that("Newick Tree import works", {
   expect_is(sum_stats$trees, "list")
   expect_equal(length(sum_stats$trees), 2)
 
-  for (tree in sum_stats$trees) {
-    expect_is(tree, "character")
-    expect_that(nchar(tree), is_more_than(3))
+  for (locus in sum_stats$trees) {
+    for (tree in locus) {
+      expect_is(tree, "character")
+      expect_that(nchar(tree), is_more_than(3))
+    }
   }
 })
 

@@ -88,6 +88,7 @@ void addLocusSumStats(const Forest &forest,
   }
 }
 
+
 NewickTree* getNewickTree(const Forest &forest) {
   for (size_t i = 0; i < forest.model().countSummaryStatistics(); ++i) {
     SummaryStatistic* sum_stat = forest.model().getSummaryStatistic(i);
@@ -98,10 +99,11 @@ NewickTree* getNewickTree(const Forest &forest) {
   return NULL;
 };
 
+
 std::string readSegmentTree(SummaryStatistic* sum_stat) {
   std::stringstream ss;
   sum_stat->printSegmentOutput(ss);
   std::string tree = ss.str();
-  //tree.erase(tree.end()-2);
+  if (tree.size() > 2) tree.erase(tree.size() - 2);
   return tree;
 }

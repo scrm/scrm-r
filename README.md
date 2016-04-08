@@ -1,9 +1,10 @@
 [![Linux Build Status](https://travis-ci.org/scrm/scrm-r.svg?branch=master)](https://travis-ci.org/scrm/scrm-r)
 [![Windows Build Status](https://ci.appveyor.com/api/projects/status/octt2w69byiq198s/branch/master?svg=true)](https://ci.appveyor.com/project/paulstaab/scrm-r/branch/master)
+[![Coverage Status](https://coveralls.io/repos/github/scrm/scrm-r/badge.svg?branch=master)](https://coveralls.io/github/scrm/scrm-r?branch=master)
 [![CRAN Status](http://www.r-pkg.org/badges/version/scrm)](http://cran.r-project.org/web/packages/scrm)
 [![CRAN RStudio Mirror Downloads](http://cranlogs.r-pkg.org/badges/scrm)](http://cran.r-project.org/web/packages/scrm/index.html)
 
-R Package scrm
+scrm R Package
 =======================
 
 _scrm_ is a coalescence simulator for the evolution 
@@ -15,7 +16,6 @@ This R package contains a copy _scrm_, packaged for convenient usage in R.
 
 Installation
 ======================
-__This packages requires an R version of `3.1.0` or higher.__
 
 It is recommended to use the current CRAN version. It can be installed
 from within R using
