@@ -137,10 +137,12 @@ class SumStatStore {
 
       else if (typeid(*sum_stat) == typeid(NewickTree)) {
         as<List>(sumstat_list_[i])[locus] = nt_trees_;
+        nt_trees_ = CharacterVector(0);
       }
 
       else if (typeid(*sum_stat) == typeid(OrientedForest)) {
         as<List>(sumstat_list_[i])[locus] = of_trees_;
+        of_trees_ = CharacterVector(0);
       }
 
       else if (typeid(*sum_stat) == typeid(FrequencySpectrum)) {
@@ -166,7 +168,7 @@ class SumStatStore {
     std::stringstream ss;
     sum_stat->printSegmentOutput(ss);
     std::string tree = ss.str();
-    if (tree.size() > 2) tree.erase(tree.size() - 2);
+    if (tree.size() > 2) tree.erase(tree.size() - 1);
     return tree;
   }
 };
