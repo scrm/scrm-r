@@ -62,9 +62,11 @@ test_that("Oriented Forest import works", {
   expect_is(sum_stats$oriented_forest, "list")
   expect_equal(length(sum_stats$oriented_forest), 4)
 
-  for (tree in sum_stats$oriented_forest) {
-    expect_is(tree, "character")
-    expect_that(nchar(tree), is_more_than(3))
+  for (locus in sum_stats$oriented_forest) {
+    for (tree in locus) {
+      expect_is(tree, "character")
+      expect_that(nchar(tree), is_more_than(3))
+    }
   }
 })
 
