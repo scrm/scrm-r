@@ -29,10 +29,10 @@ sum_stats <- scrm('5 1 -r 1.5 100 -T')
 Now we can convert the trees into ape's internal format using `read.tree`:
 ```{r}
 library(ape)
-trees <- read.tree(text = sum_stats$trees[[1]])
+trees <- read.tree(text = paste(sum_stats$trees[[1]], collapse = ";"))
 ```
 
 And -- for example -- print the trees:
 ```{r, fig.align='center'}
-plot(trees, no.margin=TRUE)
+plot(trees, no.margin = TRUE)
 ```

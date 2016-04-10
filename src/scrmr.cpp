@@ -12,7 +12,6 @@
 #include "summary_statistics.h"
 #include "r_random_generator.h"
 
-
 using namespace Rcpp;
 std::ofstream fs;
 bool write_file;
@@ -74,8 +73,8 @@ List scrm(std::string args, std::string file = "") {
     return List::create(_("version") = VERSION);
   }
 
-  FastFunc ff;
-  RRandomGenerator rrg(&ff);
+  std::shared_ptr<FastFunc> ff = std::make_shared<FastFunc>();
+  RRandomGenerator rrg(ff);
 
   /** Open a file for writing if 'file' is given */
   if (file.length() > 0) {
@@ -97,22 +96,27 @@ List scrm(std::string args, std::string file = "") {
     Rf_warning("No summary statisics specified. No output will be produced.");
 
   Forest forest = Forest(&model, &rrg);
-  List sum_stats = initSumStats(forest);
+
+  SumStatStore stats_store(forest);
 
   // Loop over the independent loci/chromosomes
-  for (size_t rep_i=0; rep_i < model.loci_number(); ++rep_i) {
+  for (size_t locus = 0; locus < model.loci_number(); ++locus) {
 
     // Mark the start of a new independent sample
     if (write_file) fs << std::endl << "//" << std::endl;
 
     // Now set up the ARG, and sample the initial tree
     forest.buildInitialTree();
+    stats_store.addSegmentStats(forest);
+    if (write_file) forest.printSegmentSumStats(fs);
 
     while (forest.next_base() < model.loci_length()) {
       forest.sampleNextGenealogy();
+      stats_store.addSegmentStats(forest);
+      if (write_file) forest.printSegmentSumStats(fs);
     }
 
-    addLocusSumStats(forest, rep_i, sum_stats);
+    stats_store.addLocusStats(forest, locus);
     if (write_file) forest.printLocusSumStats(fs);
 
     forest.clear();
@@ -121,5 +125,5 @@ List scrm(std::string args, std::string file = "") {
   /** Clean up */
   if (write_file) fs.close();
 
-  return sum_stats;
+  return stats_store.getStats();
 }

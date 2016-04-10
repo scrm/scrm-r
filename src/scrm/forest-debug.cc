@@ -32,7 +32,6 @@ void Forest::createExampleTree() {
 
   this->rec_bases_.push_back(5.0);  
   this->current_rec_ = 1;
-  //this->rec_bases_.push_back(105.0);  
 
   Node* leaf1 = nodes()->createNode(0, 1);
   Node* leaf2 = nodes()->createNode(0, 2);
@@ -92,11 +91,11 @@ void Forest::createExampleTree() {
 void Forest::createScaledExampleTree() {
   this->createExampleTree();
 
-  this->nodes()->at(4)->set_height(1 * 4 * model().default_pop_size); 
-  this->nodes()->at(5)->set_height(3 * 4 * model().default_pop_size); 
-  this->nodes()->at(6)->set_height(4 * 4 * model().default_pop_size); 
-  this->nodes()->at(7)->set_height(6 * 4 * model().default_pop_size); 
-  this->nodes()->at(8)->set_height(10 * 4 * model().default_pop_size); 
+  this->nodes()->at(4)->set_height(1 * 4 * model().default_pop_size()); 
+  this->nodes()->at(5)->set_height(3 * 4 * model().default_pop_size()); 
+  this->nodes()->at(6)->set_height(4 * 4 * model().default_pop_size()); 
+  this->nodes()->at(7)->set_height(6 * 4 * model().default_pop_size()); 
+  this->nodes()->at(8)->set_height(10 * 4 * model().default_pop_size()); 
 
   updateAbove(nodes()->at(4));
   updateAbove(nodes()->at(5));

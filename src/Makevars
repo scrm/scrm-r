@@ -1,4 +1,4 @@
-OBJECTS.scrmr = scrmr.o test_exports.o summary_statistics.o RcppExports.o
+OBJECTS.scrmr = scrmr.o test_exports.o RcppExports.o
 
 OBJECTS.scrm = scrm/forest.o scrm/model.o scrm/node.o scrm/node_container.o \
 							 scrm/param.o scrm/time_interval.o scrm/tree_point.o

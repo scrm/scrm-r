@@ -44,6 +44,7 @@
 #include <cmath>
 #include <iomanip>
 #include <memory>
+#include <sstream>
 
 #include "summary_statistics/summary_statistic.h"
 
@@ -68,12 +69,14 @@ class Model
 
    
    // Default values;
-   double default_pop_size;
-   size_t default_loci_length;
-   double default_growth_rate;
-   double default_mig_rate;
+   constexpr static double default_pop_size_ = 10000.0;
+   constexpr static double default_growth_rate = 0.0;
+   constexpr static double default_mig_rate = 0.0;
+   constexpr static double scaling_factor_ = 1.0 / (4 * default_pop_size_);
 
    // Getters & Setters
+   double default_pop_size() const { return Model::default_pop_size_; };
+
 
    /**
     * @brief Returns the scaling factor for times and many parameters
@@ -157,7 +160,7 @@ class Model
    double inv_double_pop_size(const size_t pop = 0, const double time = -1) const { 
      double pop_size;
      if (current_pop_sizes_ == NULL) 
-       pop_size = 1/(2*default_pop_size);
+       pop_size = 1/(2*default_pop_size());
      else 
        pop_size = current_pop_sizes_->at(pop);   // population size basal to this segment
 
@@ -402,9 +405,7 @@ class Model
 
   SeqScale getSequenceScaling() const { return seq_scale_; }
   void setSequenceScaling(SeqScale seq_scale) { seq_scale_ = seq_scale; };
-
-  private:
-   std::vector<double> change_times_;
+  
    void setLocusLength(const size_t length) { 
     // Rescale the rates that are per base pair
     for (size_t i = 0; i < change_position_.size(); ++i) {
@@ -413,6 +414,9 @@ class Model
     }
     loci_length_ = length; 
    }
+
+  private:
+   std::vector<double> change_times_;
 
    double change_position(size_t idx) const {
     return this->change_position_.at(idx);
@@ -455,8 +459,6 @@ class Model
                           size_t new_pop,
                           double default_value = nan("value to replace"));
   void addPopToVectorList(std::vector<std::vector<double> > &vector_list);
-
-   double scaling_factor_; // 1 / (4N0);
 
    // Stores information about samples. Each index represents a sample.
    std::vector<size_t> sample_populations_;

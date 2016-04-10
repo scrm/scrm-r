@@ -35,7 +35,7 @@ test_that("TMRCA import works", {
   expect_equal(length(sum_stats$tmrca), 3)
 
   for (tmrca in sum_stats$tmrca) {
-    expect_is(tmrca, "matrix")
+    expect_is(tmrca, "data.frame")
     expect_equal(ncol(tmrca), 2)
     expect_that(nrow(tmrca), is_more_than(0))
     expect_true(all(tmrca > 0))
@@ -48,21 +48,11 @@ test_that("Newick Tree import works", {
   expect_is(sum_stats$trees, "list")
   expect_equal(length(sum_stats$trees), 2)
 
-  for (tree in sum_stats$trees) {
-    expect_is(tree, "character")
-    expect_that(nchar(tree), is_more_than(3))
-  }
-})
-
-test_that("Newick Tree import works", {
-  sum_stats <- scrm("4 2 -r 1 100 -T")
-  expect_is(sum_stats, "list")
-  expect_is(sum_stats$trees, "list")
-  expect_equal(length(sum_stats$trees), 2)
-
-  for (tree in sum_stats$trees) {
-    expect_is(tree, "character")
-    expect_that(nchar(tree), is_more_than(3))
+  for (locus in sum_stats$trees) {
+    for (tree in locus) {
+      expect_is(tree, "character")
+      expect_that(nchar(tree), is_more_than(3))
+    }
   }
 })
 
@@ -72,9 +62,11 @@ test_that("Oriented Forest import works", {
   expect_is(sum_stats$oriented_forest, "list")
   expect_equal(length(sum_stats$oriented_forest), 4)
 
-  for (tree in sum_stats$oriented_forest) {
-    expect_is(tree, "character")
-    expect_that(nchar(tree), is_more_than(3))
+  for (locus in sum_stats$oriented_forest) {
+    for (tree in locus) {
+      expect_is(tree, "character")
+      expect_that(nchar(tree), is_more_than(3))
+    }
   }
 })
 
