@@ -1,9 +1,11 @@
-scrm 1.7.0-0
+scrm 1.7.2-0
 ============
 
-* Return the TMRCA summary statistic as a data.frame instead of a matrix.
-* Return Newick trees as a character vector where each tree is an entry instead
-  of all trees being concatenated.
+* Updated the sources of scrm to version 1.7.2.
+* Now returns the TMRCA summary statistic as a data.frame instead of a matrix.
+* Now returns Newick trees as a character vector where each tree is an entry
+  instead of all trees being concatenated.
+
 
 
 scrm 1.6.0-2
@@ -12,10 +14,12 @@ scrm 1.6.0-2
 * Replaced 'scrm' with 'it' in the package description.
 
 
+
 scrm 1.6.0-1
 ============
 
 * Updated the sources of scrm to version 1.6.0.
+
 
 
 scrm 1.5.1-1
@@ -23,6 +27,7 @@ scrm 1.5.1-1
 
 * Updated the sources of scrm to version 1.5.1.
 * Updated the citation information.
+
 
 
 scrm 1.5.0-1
@@ -34,6 +39,7 @@ scrm 1.5.0-1
   the patch.
 
 
+
 scrm 1.3-3
 ==========
 
@@ -42,11 +48,13 @@ scrm 1.3-3
 * Added title to vignettes.
 
 
+
 scrm 1.3-2
 ==========
 
 * Added missing import statement.
 * Fixed access to unmapped memory.
+
 
 
 scrm 1.3-1
