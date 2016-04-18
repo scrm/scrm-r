@@ -7,6 +7,7 @@ scrm 1.7.2-0
 * Now returns Newick trees as a character vector where each tree is an entry
   instead of all trees being concatenated (#24).
 * Skip tests if `testthat` is not available (#25).
+* Optimize performance for large Newick trees (#26).
 
 
 
