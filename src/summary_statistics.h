@@ -136,8 +136,10 @@ class SumStatStore {
       }
 
       else if (typeid(*sum_stat) == typeid(NewickTree)) {
-        as<List>(sumstat_list_[i])[locus] = nt_trees_;
-        nt_trees_ = CharacterVector(0);
+        CharacterVector trees(no_init(nt_trees_.size()));
+        std::copy(nt_trees_.begin(), nt_trees_.end(), trees.begin());
+        as<List>(sumstat_list_[i])[locus] = trees;
+        nt_trees_.clear();
       }
 
       else if (typeid(*sum_stat) == typeid(OrientedForest)) {
@@ -160,7 +162,7 @@ class SumStatStore {
  private:
   List sumstat_list_;
   NewickTree* nt_;
-  CharacterVector nt_trees_;
+  std::list<std::string> nt_trees_;
   OrientedForest* of_;
   CharacterVector of_trees_;
 
