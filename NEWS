@@ -1,10 +1,12 @@
 scrm 1.7.2-0
 ============
 
-* Updated the sources of scrm to version 1.7.2.
-* Now returns the TMRCA summary statistic as a data.frame instead of a matrix.
+* Updated the sources of scrm to version 1.7.2 (#23).
+* Now returns the TMRCA summary statistic as a data.frame instead of a
+  matrix (#23).
 * Now returns Newick trees as a character vector where each tree is an entry
-  instead of all trees being concatenated.
+  instead of all trees being concatenated (#24).
+* Skip tests if `testthat` is not available (#25).
 
 
 
