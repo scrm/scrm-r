@@ -51,8 +51,9 @@ bool write_file;
 //'         genealogies simulated with \emph{scrm} with package 'ape'.
 //' }
 //' @examples
+//' set.seed(789)
 //' # 5 Chromosomes with 100 bases each with recombination and mutation
-//' sum_stats <- scrm('5 1 -r 5 100 -t 5 -T -L')
+//' sum_stats <- scrm('5 1 -r 3.1 100 -t 1.5 -T -L')
 //' str(sum_stats)
 //'
 //' # Simulate the site frequency spectrum at 3 loci. For each locus
