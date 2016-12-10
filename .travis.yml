@@ -6,12 +6,13 @@ r:
   - release
   - devel
 
-r_github_packages:
-  - jimhester/lintr 
-  - jimhester/covr
+r_packages:
+  - lintr
+  - covr
 
 after_success:
-  - Rscript tools/lint-and-covr.R
+  - Rscript -e "lintr::lint_package()"
+  - Rscript -e "library(covr); coveralls()"
 
 notifications:
   email: false
