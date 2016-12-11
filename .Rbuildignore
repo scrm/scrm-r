@@ -12,3 +12,4 @@
 ^src\/scrm\/random\/mersenne_twister\.cc$
 ^src\/scrm\/random\/mersenne_twister\.h$
 ^src\/scrm\/random\/speedtest\.cc$
+^cran-comments\.md$

@@ -22,7 +22,7 @@ scrm is uses a syntax compatible with the popular program [ms][1]. There are, ho
     * `-eI` (sampling haplotypes at multiple time points) and
     * `-oSFS` (generates frequency spectra). 
     
-For all other options, you can also refer to [ms' manual][2] to get a detailed description of what the commands are doing. scrm should happily execute any ms command that does not contain `-c` and `-s`. Also scrm has somewhat stricter requirements regarding the order of arguments if population admixture (`-es`) is involved.
+For all other options, you can also refer to [ms' manual][1] to get a detailed description of what the commands are doing. scrm should happily execute any ms command that does not contain `-c` and `-s`. Also scrm has somewhat stricter requirements regarding the order of arguments if population admixture (`-es`) is involved.
 
 ## General Syntax
 The arguments for calling _scrm_ are
@@ -61,7 +61,7 @@ decline in population sizes.
 * `-t < $\theta$ >`: Set the mutation rate to $\theta = 4N_0u$, where _u_ is the neutral mutation rate per locus. If this options is given, scrm generates the segregating sites output.
 * `-transpose-segsites` or `--transpose-segsites`: If given, the segregating sites are printed with each row representing a mutation and each column representing a haplotype, rather than the other way round. Additionally, the time at which a mutation occurred is reported (in units of _4 * N0_ generations) [since v1.7.0].
 * `-T`: Print the local genealogies in newick format.
-* `-O`: Print the local genealogies in the `oriented forest` format as described in [Kelleher _et al._ (2014)](http://dx.doi.org/10.1016/j.tpb.2014.05.001) [since v1.2].
+* `-O`: Print the local genealogies in the `oriented forest` format as described in [Kelleher _et al._ (2014)][2] [since v1.2].
 * `-L`: Print the TMRCA and the local tree length for each segment (behaves different to ms). Both values are scaled in coalescent time units, e.g. in _4 * N0_ generations.
 * `-oSFS`: Print the site frequency spectrum. Requires that the mutation rate $\theta$ is given with the '-t' option.
 * `-SC [ms|rel|abs]`: Scaling of sequence positions. Either relative to the locus length between 0 and 1 (`rel`), absolute in base pairs (`abs`) or `ms`'s scaling (default) where the positions in the _segregating sites_ output are relative, and the positions in the trees output are absolute (`ms`) [since v1.3.0]. 
@@ -117,4 +117,4 @@ length of the sequence as second argument, while `-sr` just has the rate as argu
 
 
 [1]: http://home.uchicago.edu/~rhudson1/source/mksamples.html
-[2]: https://webshare.uchicago.edu/users/rhudson1/Public/ms.folder/msdoc.pdf?ticket=t_DunQ7c99
+[2]: http://www.sciencedirect.com/science/article/pii/S0040580914000355
