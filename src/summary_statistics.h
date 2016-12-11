@@ -48,7 +48,7 @@ T* getSumStat(const Forest &forest) {
     }
   }
   return NULL;
-};
+}
 
 std::string readSegmentTree(SummaryStatistic* sum_stat);
 
