@@ -4,8 +4,15 @@
 # with files from scrm's git repo supposed to be at
 # ../scrm
 
+mkdir tmp
+git clone https://github.com/scrm/scrm tmp/
+
+
 rsync -rvcA --exclude '.*'\
             --include '*/'\
             --include '*.cc' --include '*.h'\
             --exclude='*'\
-            ../scrm/src/* src/scrm/
+            tmp/src/* src/scrm/
+
+rm -rf tmp
+
