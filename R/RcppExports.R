@@ -44,18 +44,18 @@
 #' scrm('10 3 -r 400 1000000 -l 100000 -I 2 4 6 0.5 -t 300 -oSFS')$sfs
 #'
 scrm <- function(args, file = "") {
-    .Call('scrm_scrm', PACKAGE = 'scrm', args, file)
+    .Call('_scrm_scrm', PACKAGE = 'scrm', args, file)
 }
 
 test_RRG_sample <- function() {
-    .Call('scrm_test_RRG_sample', PACKAGE = 'scrm')
+    .Call('_scrm_test_RRG_sample', PACKAGE = 'scrm')
 }
 
 test_RRG_sampleUnitExpo <- function() {
-    .Call('scrm_test_RRG_sampleUnitExpo', PACKAGE = 'scrm')
+    .Call('_scrm_test_RRG_sampleUnitExpo', PACKAGE = 'scrm')
 }
 
 test_RRG_sampleExpoExpoLimit <- function(lambda, b, limit) {
-    .Call('scrm_test_RRG_sampleExpoExpoLimit', PACKAGE = 'scrm', lambda, b, limit)
+    .Call('_scrm_test_RRG_sampleExpoExpoLimit', PACKAGE = 'scrm', lambda, b, limit)
 }
 
