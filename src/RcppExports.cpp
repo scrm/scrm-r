@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // scrm
 List scrm(std::string args, std::string file);
-RcppExport SEXP scrm_scrm(SEXP argsSEXP, SEXP fileSEXP) {
+RcppExport SEXP _scrm_scrm(SEXP argsSEXP, SEXP fileSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,7 +19,7 @@ END_RCPP
 }
 // test_RRG_sample
 double test_RRG_sample();
-RcppExport SEXP scrm_test_RRG_sample() {
+RcppExport SEXP _scrm_test_RRG_sample() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -29,7 +29,7 @@ END_RCPP
 }
 // test_RRG_sampleUnitExpo
 double test_RRG_sampleUnitExpo();
-RcppExport SEXP scrm_test_RRG_sampleUnitExpo() {
+RcppExport SEXP _scrm_test_RRG_sampleUnitExpo() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -39,7 +39,7 @@ END_RCPP
 }
 // test_RRG_sampleExpoExpoLimit
 double test_RRG_sampleExpoExpoLimit(double lambda, double b, double limit);
-RcppExport SEXP scrm_test_RRG_sampleExpoExpoLimit(SEXP lambdaSEXP, SEXP bSEXP, SEXP limitSEXP) {
+RcppExport SEXP _scrm_test_RRG_sampleExpoExpoLimit(SEXP lambdaSEXP, SEXP bSEXP, SEXP limitSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -49,4 +49,17 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(test_RRG_sampleExpoExpoLimit(lambda, b, limit));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_scrm_scrm", (DL_FUNC) &_scrm_scrm, 2},
+    {"_scrm_test_RRG_sample", (DL_FUNC) &_scrm_test_RRG_sample, 0},
+    {"_scrm_test_RRG_sampleUnitExpo", (DL_FUNC) &_scrm_test_RRG_sampleUnitExpo, 0},
+    {"_scrm_test_RRG_sampleExpoExpoLimit", (DL_FUNC) &_scrm_test_RRG_sampleExpoExpoLimit, 3},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_scrm(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
