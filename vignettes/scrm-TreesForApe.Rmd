@@ -31,6 +31,7 @@ Now we can convert the trees into ape's internal format using `read.tree`:
 ```{r}
 library(ape)
 trees <- read.tree(text = paste0(sum_stats$trees[[1]]))
+trees
 ```
 
 And -- for example -- print the trees:
