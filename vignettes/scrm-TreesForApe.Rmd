@@ -24,12 +24,14 @@ First, we call __scrm__ to simulate the ARG:
 ```{r}
 library(scrm)
 sum_stats <- scrm('5 1 -r 1.5 100 -T')
+sum_stats$trees[[1]]
 ```
 
 Now we can convert the trees into ape's internal format using `read.tree`:
 ```{r}
 library(ape)
-trees <- read.tree(text = paste(sum_stats$trees[[1]], collapse = ""))
+trees <- read.tree(text = paste0(sum_stats$trees[[1]]))
+trees
 ```
 
 And -- for example -- print the trees:
