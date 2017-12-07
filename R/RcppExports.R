@@ -11,12 +11,12 @@
 #'
 #' @section Seeding:
 #' The R version of scrm uses random number from R's random generator.
-#' Therefore, the '-seed' argument of the command line version will be ignored,
+#' Therefore, the '-seed' argument of the command-line version will be ignored,
 #' and no seed is given in the output.
 #' Use the R function \code{\link{set.seed}} prior to calling this
-#' function to ensure reproduciblity of results.
+#' function to ensure reproducibility of results.
 #'
-#' @param args A string containing the command line arguments for scrm. Look at
+#' @param args A string containing the command-line arguments for scrm. Look at
 #'             scrms vignette for a description of available arguments.
 #' @param file If provided, scrm will additionally write it is output into
 #'             a file with the given file, using an ms-like text output.
@@ -28,7 +28,7 @@
 #' @keywords datagen
 #' @seealso
 #' \itemize{
-#'   \item \code{vignette('scrm-Arguments')} for an overview of commandline arguments and
+#'   \item \code{vignette('scrm-Arguments')} for an overview of command line arguments and
 #'   \item \code{vignette('scrm-TreesForApe')} for an example on using
 #'         genealogies simulated with \emph{scrm} with package 'ape'.
 #' }
