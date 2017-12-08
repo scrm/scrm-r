@@ -11,15 +11,7 @@ simulate the neutral evolution of chromosomes/biological sequences
 subject to possibly complicated population structure.
 The program \emph{scrm} is an implementation of this model that is designed to
 act as an drop-in replacement for the widely adopted coalescent simulator
-\emph{ms}. This package contains \emph{scrm} along with a convinient R interface.
-}
-\author{
-Paul Staab,
-Zhu Sha,
-Dirk Metzler &
-Gerton Lunter
-
-Maintainer: Paul Staab \email{develop@paulstaab.de}
+\emph{ms}. This package contains \emph{scrm} along with an R interface.
 }
 \seealso{
 \itemize{
@@ -29,4 +21,11 @@ Maintainer: Paul Staab \email{develop@paulstaab.de}
         genealogies simulated with \emph{scrm} with package 'ape'.
 }
 }
+\author{
+Paul Staab,
+Zhu Sha,
+Dirk Metzler &
+Gerton Lunter
 
+Maintainer: Paul Staab \email{develop@paulstaab.de}
+}
