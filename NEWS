@@ -1,3 +1,11 @@
+scrm 1.7.2-4
+============
+
+* Fixed a servere bug (#38) introduced in 1.7.2-3 that caused a seg_fault 
+  when simulating many loci.
+
+
+
 scrm 1.7.2-3
 ============
 
