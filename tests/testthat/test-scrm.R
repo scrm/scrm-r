@@ -84,3 +84,9 @@ test_that("printing help & verison information works", {
   expect_error(scrm("-h"))
   expect_error(scrm("--help"))
 })
+
+
+test_that("simulation many loci works", {
+  res <- scrm("10 10000 -t 1")
+  expect_equal(length(res$seg_sites), 10000)
+})
