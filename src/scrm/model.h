@@ -30,7 +30,6 @@
 
 #ifndef scrm_src_model
 #define scrm_src_model
-#pragma GCC diagnostic ignored "-Wsign-compare"
 
 #include "macros.h" // Needs to be before cassert
 
