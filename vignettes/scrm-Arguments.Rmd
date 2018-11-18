@@ -21,8 +21,9 @@ scrm is uses a syntax compatible with the popular program [ms][1]. There are, ho
     * `-st` (changing mutation rate),
     * `-eI` (sampling haplotypes at multiple time points) and
     * `-oSFS` (generates frequency spectra). 
+* We do not support changing the number of populations with `-ema`. Our version of the command is just `-ema <t> <M11> <M12> ...` instead of `-ema <t> <npop> <M11> <M12> ...`.
     
-For all other options, you can also refer to [ms' manual][1] to get a detailed description of what the commands are doing. scrm should happily execute any ms command that does not contain `-c` and `-s`. Also scrm has somewhat stricter requirements regarding the order of arguments if population admixture (`-es`) is involved.
+For all other options, you can also refer to [ms' manual][1] to get a detailed description of what the commands are doing. scrm should happily execute any ms command that does not contain `-c`, `-s` and `-ema`. Also, scrm has somewhat stricter requirements regarding the order of arguments if population admixture (`-es`) is involved.
 
 ## General Syntax
 The arguments for calling _scrm_ are
@@ -44,7 +45,7 @@ In all commands, migrations rates _M = 4*N0*m_, where _m_ is the fraction of a p
 * `-I <npop> <s1> ... <sn> [<M>]`: Use an island model with _npop_ populations, where _s1_ to _sn_ haplotypes are sampled from population 1 to n, respectively. Optionally assume a symmetric migration rate of _M_.
 * `-M <M>`: Assume a symmetric migration rate of _M/(npop-1)_. 
 * `-m <i> <j> <M>`: Set the migration rate from population _j_ to population _i_ to _M_ (looking forward in time) [since v1.3.1].
-* `-ma <M11> <M21> ... <M21> ...`: Set the migration matrix (Dimension is _npop x npop_). Diagonals elements are ignored but required.  
+* `-ma <M11> <M21> ... <M21> ...`: Set the migration matrix (Dimension is _npop x npop_). Diagonals elements are ignored but required (you can use `x` or `0`).  
 
 ### Population size changes
 For exponential growth/decline of a population, the parameter _a_ changes the size of a population
@@ -89,7 +90,7 @@ The command this section all have a time _t_ as first parameter. Changes made by
 * `-eI <t> <s1> ... <sn>`: Sample _s1_ to _sn_ haplotypes are from population _1_ to _n_, respectively, at time _t_. 
 * `-eM <t> <M>`: Assume a symmetric migration rate of _M/(npop-1)_ at time _t_.
 * `-em <t> <i> <j> <M>`: Set the migration rate from population _j_ to population _i_ to _M_ (looking forward in time) at time _t_  [since v1.3.1].
-* `-ema <npop> <M11> <M12> ... <M21> ...`: Set the migration matrix (Dimension is _npop x npop_). Diagonals elements are ignored but required.  
+* `-ema <t> <M11> <M12> ... <M21> ...`: Set the migration matrix at time _t_ (Dimension is _npop x npop_). Diagonals elements are ignored but required (use 'x' or 0). The rates apply pastwards from time _t_.
 
 ### Population size changes
 
@@ -106,6 +107,8 @@ The command this section all have a time _t_ as first parameter. Changes made by
 Viewed backwards in time, this moves a fraction _1-p_ of the linages in population _i_ to population _j_. This does not change the number of populations, population sizes, growth or migration rates in any way [since v1.5.0].
 * `-ej <t> <j> <i>`: Adds a specialization event in population _i_ that creates population _j_ (forwards in time). Technically (and looking backwards in time), it moves all lines from population _j_ into population _i_ at time _t_. Migration rates into population _j_ are set to 0 for the time further back into the past.
  
+When multiple `es`, `eps` or `ej` arguments are given for the same time _t_, the migrations are executed in the order in which the commands are given. For example if we have `-es 0.08 2 .2 -ej 0.08 3 1`, first 80% of pop 2 move to a newly created pop 3 (viewed backwards in time), then everyone that just moved to pop 3 moves on to pop 1. This is equivalent to `-eps 0.08 2 1 .2`, except that the latter does not create the empty population 3.
+
 ## Sequence specific parameters
 The following commands change the model parameters from at a sequence position _s_.
 You should still set the initial rate with `-r` or `-t`, respectively, and then use
