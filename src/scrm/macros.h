@@ -29,6 +29,7 @@
 #include "Rcpp.h"
 
 // Suppress debug output.
+#pragma GCC diagnostic ignored "-Wunused-value"
 #define dout 0 && Rcpp::Rcout
 
 // Assure that assertions are deactivated.
@@ -45,6 +46,7 @@
 
 // Debug mode
 #ifdef UNITTEST // No debug output in unittests
+#pragma GCC diagnostic ignored "-Wunused-value"
 #define dout 0 && std::cout
 #else           // Produce debug output
 #define dout std::cout
@@ -52,6 +54,7 @@
 
 #else
 // Normal Mode
+#pragma GCC diagnostic ignored "-Wunused-value"
 #define dout 0 && std::cout
 #endif
 

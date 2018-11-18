@@ -1,7 +1,7 @@
 Package: scrm
 Type: Package
 Title: Simulating the Evolution of Biological Sequences
-Version: 1.7.2-4
+Version: 1.7.3-0
 Authors@R: c(
     person('Paul', 'Staab', , 'develop@paulstaab.de', role=c('aut', 'cre', 'cph')),
     person('Zhu', 'Sha', role=c('aut', 'cph')),
@@ -29,4 +29,4 @@ Suggests:
 SystemRequirements: C++11
 VignetteBuilder: knitr
 LinkingTo: Rcpp
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
