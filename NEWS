@@ -1,3 +1,10 @@
+scrm 1.7.3-1
+============
+
+* Fix `-Wcatch-value` compiler warnings on R-devel.
+
+
+
 scrm 1.7.3-0
 ============
 
