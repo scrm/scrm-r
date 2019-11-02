@@ -4,9 +4,10 @@
 #' approximation of the Ancestral Recombination Graph. It can be used to
 #' simulate the neutral evolution of chromosomes/biological sequences
 #' subject to possibly complicated population structure.
-#' The program \emph{scrm} is an implementation of this model that is designed to
-#' act as an drop-in replacement for the widely adopted coalescent simulator
-#' \emph{ms}. This package contains \emph{scrm} along with an R interface.
+#' The program \emph{scrm} is an implementation of this model that is designed
+#' to act as an drop-in replacement for the widely adopted coalescent 
+#' simulator \emph{ms}. 
+#' This package contains \emph{scrm} along with an R interface.
 #'
 #' @author
 #' Paul Staab,
@@ -24,7 +25,8 @@
 #' @seealso
 #' \itemize{
 #'   \item \code{\link{scrm}} for details on how to use \emph{scrm},
-#'   \item \code{vignette('scrm-Arguments')} for an overview of command line arguments and
+#'   \item \code{vignette('scrm-Arguments')} for an overview of command line 
+#'         arguments and
 #'   \item \code{vignette('scrm-TreesForApe')} for an example on using
 #'         genealogies simulated with \emph{scrm} with package 'ape'.
 #' }
