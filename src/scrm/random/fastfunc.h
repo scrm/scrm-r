@@ -86,7 +86,8 @@ inline double FastFunc::fastexp_lo(double y) {
 
 inline double FastFunc::fastlog(double x) {
   const float offset = 2047;                // as int64_t: 0x409ffc00000....
-  double y = x;
+  double y = 0.0;
+  y = x;
   int64_t* yint = (int64_t*)(&y);
   int expon = ((*yint) >> 52) - 1023;       // base-2 exponent of float
   int index = ((*yint) >> (52-10)) & 1023;  // upper 10 bits of mantissa
