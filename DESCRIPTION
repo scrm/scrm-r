@@ -3,11 +3,16 @@ Type: Package
 Title: Simulating the Evolution of Biological Sequences
 Version: 1.7.3-1
 Authors@R: c(
-    person('Paul', 'Staab', , 'develop@paulstaab.de', role=c('aut', 'cre', 'cph')),
+    person('Paul', 'Staab', role=c('aut', 'cph')),
     person('Zhu', 'Sha', role=c('aut', 'cph')),
-    person('Dirk', 'Metzler', role=c('aut', 'cph', 'ths')),
+    person('Dirk', 'Metzler', , 'metzler@bio.lmu.de', role=c('aut', 'cre', 'cph', 'ths')),
     person('Gerton', 'Lunter', role=c('aut', 'cph', 'ths'))
     )
+Author: Paul Staab [aut, cre, cph],
+	Zhu Sha [aut, cph],
+	Dirk Metzler [aut, cre, cph, ths],
+	Gerton Lunter [aut, cph, ths]
+Maintainer: Dirk Metzler <metzler@bio.lmu.de>
 Description: A coalescent simulator that allows the rapid simulation of
     biological sequences under neutral models of evolution. Different to other
     coalescent based simulations, it has an optional approximation parameter that
