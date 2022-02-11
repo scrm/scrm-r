@@ -1,7 +1,7 @@
 /*
  * scrm is an implementation of the Sequential-Coalescent-with-Recombination Model.
  * 
- * Copyright (C) 2013, 2014 Paul R. Staab, Sha (Joe) Zhu, Dirk Metzler and Gerton Lunter
+ * Copyright (C) 2013, 2014, 2022 Paul R. Staab, Sha (Joe) Zhu, Dirk Metzler and Gerton Lunter
  * 
  * This file is part of scrm.
  * 
@@ -103,9 +103,9 @@ class Model
     *
     * @return The recombination rate per base pair per generation
     */
-   double recombination_rate(const size_t idx = -1) const { 
-     if (idx == -1) return recombination_rates_.at(current_seq_idx_); 
-     else return recombination_rates_.at(idx);
+   double recombination_rate(const size_t idx = std::numeric_limits<size_t>::max()) const { 
+       if (idx==std::numeric_limits<size_t>::max()) return recombination_rates_.at(current_seq_idx_); 
+       else return recombination_rates_.at(idx);
    }
 
    /**

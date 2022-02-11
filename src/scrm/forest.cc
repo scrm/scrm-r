@@ -1,4 +1,4 @@
-  /*
+/*
  * scrm is an implementation of the Sequential-Coalescent-with-Recombination Model.
  *
  * Copyright (C) 2013, 2014 Paul R. Staab, Sha (Joe) Zhu, Dirk Metzler and Gerton Lunter
@@ -644,7 +644,7 @@ void Forest::calcRates(const TimeInterval &ti) {
  */
 void Forest::sampleEvent(const TimeInterval &ti, double &event_time, Event &return_event) const {
   event_time = -1;
-  size_t event_line = -1;
+  size_t event_line = std::numeric_limits<size_t>::max();
 
   // Sample on which time and time line the event happens (if any)
   for (size_t i = 0; i < 3; ++i) {
@@ -674,7 +674,7 @@ void Forest::sampleEventType(const double time, const size_t time_line,
                              const TimeInterval &ti, Event &event) const {
   event = Event(time);
 
-  if ( time_line != -1 && rates_[time_line] == 0.0 ) {
+  if ( time_line != std::numeric_limits<size_t>::max() && rates_[time_line] == 0.0 ) {
     throw std::logic_error("An event with rate 0 has happened!");
   }
 

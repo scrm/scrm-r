@@ -559,7 +559,7 @@ void Model::calcPopSizes() {
     }
   }
 
-  size_t last_growth = -1;
+  size_t last_growth = std::numeric_limits<size_t>::max();
   double duration = -1;
   for (size_t i = 1; i < change_times_.size(); ++i) {
     if (! growth_rates_list_.at(i - 1).empty()) last_growth = i - 1;
@@ -583,7 +583,7 @@ void Model::calcPopSizes() {
       pop_sizes_list_.at(i).at(pop) = pop_sizes_list_.at(i - 1).at(pop);
 
       // ... and scale it if there was growth
-      if (last_growth != -1) {
+      if (last_growth != std::numeric_limits<size_t>::max()) {
         pop_sizes_list_.at(i).at(pop) *=
           std::exp((growth_rates_list_.at(last_growth).at(pop)) * duration);
       }

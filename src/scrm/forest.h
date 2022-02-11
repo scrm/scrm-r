@@ -47,6 +47,7 @@
 #include <iostream> // ostreams
 #include <iomanip>  // Used for debug output
 #include <sstream>  // Used for debug output
+#include <limits>
 
 #include "contemporaries_container.h"
 #include "event.h"
