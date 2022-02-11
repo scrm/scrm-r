@@ -81,7 +81,7 @@ test_that("Frequency spectrum import works", {
   expect_is(sum_stats$sfs, "matrix")
   expect_equal(nrow(sum_stats$sfs), 5)
   expect_equal(ncol(sum_stats$sfs), 6)
-  for (i in seq_len(sum_stats$sfs)) {
-    expect_equal(sum(sum_stats$sfs[i, ]), ncol(sum_stats$seg_sites[[i]]))
+  for (i in seq_len(nrow(sum_stats$sfs))) {
+    expect_equal(sum(sum_stats$sfs[i,]), ncol(sum_stats$seg_sites[[i]]))
   }
 })
