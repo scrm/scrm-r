@@ -64,14 +64,13 @@ test_that("Oriented Forest import works", {
   expect_is(stats, "list")
   expect_is(stats$oriented_forest, "list")
   expect_equal(length(stats$oriented_forest), 4)
-
   for (locus in stats$oriented_forest) {
     for (tree in locus) {
       expect_is(tree, "character")
       expect_that(nchar(tree), is_more_than(3))
     }
   }
-
+  
   expect_true(stats$oriented_forest[[1]][1] != stats$oriented_forest[[2]][1])
 })
 
