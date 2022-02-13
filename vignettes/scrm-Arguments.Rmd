@@ -120,4 +120,4 @@ length of the sequence as second argument, while `-sr` just has the rate as argu
 
 
 [1]: http://home.uchicago.edu/~rhudson1/source/mksamples.html
-[2]: http://www.sciencedirect.com/science/article/pii/S0040580914000355
+[2]: https://www.sciencedirect.com/science/article/pii/S0040580914000355
