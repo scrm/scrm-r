@@ -39,7 +39,7 @@ Help & Documentation
 - The basic usage of `scrm::scrm()` is explained in its R help page `help('scrm')`.
 - The package contains a vignette on _scrm_'s command line arguments: `vignette('scrm-Arguments')`.
 - Online documentation for the command line program is available in 
-  [_scrm's Wiki_](https://github.com/paulstaab/scrm/wiki).
+  [_scrm's Wiki_](https://github.com/scrm/scrm/wiki).
 
 
 Citation
@@ -50,7 +50,7 @@ Please cite the following article when using _scrm_ in a publication:
 > **scrm: efficiently simulating long sequences using the approximated coalescent
 > with recombination**. 
 > Bioinformatics (2015) 31 (10): 1680-1682.
-> [doi:10.1093/bioinformatics/btu861](http://bioinformatics.oxfordjournals.org/content/31/10/1680).
+> [doi:10.1093/bioinformatics/btu861](https://academic.oup.com/bioinformatics/article/31/10/1680/176764).
 
 
 Bug Reports
