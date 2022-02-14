@@ -1,7 +1,7 @@
 Package: scrm
 Type: Package
 Title: Simulating the Evolution of Biological Sequences
-Version: 1.7.4-0
+Version: 1.7.4-1
 Authors@R: c(
     person('Paul', 'Staab', role=c('aut', 'cph')),
     person('Zhu', 'Sha', role=c('aut', 'cph')),
@@ -14,8 +14,10 @@ Author: Paul Staab [aut, cph],
 	Gerton Lunter [aut, cph, ths]
 Maintainer: Dirk Metzler <metzler@bio.lmu.de>
 Description: A coalescent simulator that allows the rapid simulation of
-    biological sequences under neutral models of evolution. Different to other
-    coalescent based simulations, it has an optional approximation parameter that
+    biological sequences under neutral models of evolution, see
+    Staab et al. (2015) <doi:10.1093/bioinformatics/btu861>.
+    Different to other coalescent based simulations,
+    it has an optional approximation parameter that
     allows for high accuracy while maintaining a linear run time cost for long
     sequences. It is optimized for simulating massive data sets as produced by Next-
     Generation Sequencing technologies for up to several thousand sequences.
