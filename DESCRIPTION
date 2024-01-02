@@ -1,7 +1,7 @@
 Package: scrm
 Type: Package
 Title: Simulating the Evolution of Biological Sequences
-Version: 1.7.4-1
+Version: 1.7.5
 Authors@R: c(
     person('Paul', 'Staab', role=c('aut', 'cph')),
     person('Zhu', 'Sha', role=c('aut', 'cph')),
@@ -33,7 +33,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 0.9.0)
-SystemRequirements: C++11
 VignetteBuilder: knitr
 LinkingTo: Rcpp
 RoxygenNote: 6.1.0

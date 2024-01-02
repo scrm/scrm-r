@@ -14,5 +14,4 @@ OBJECTS.sumstats = scrm/summary_statistics/frequency_spectrum.o \
 OBJECTS = $(OBJECTS.scrmr) $(OBJECTS.scrm) $(OBJECTS.random) \
           $(OBJECTS.sumstats)
 
-CXX_STD = CXX11
 PKG_CPPFLAGS = -DVERSION="\"R\"" -DRBUILD
